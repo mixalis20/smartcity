@@ -9,16 +9,8 @@ body {
     background-image: url(background.jpg);
 }
 
-#map {
-    width: 80%;
-    height: 80%;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border: 2px solid #ddd;
-    margin-top: 20px;
-}
 
-h1 {
+h4 {
     text-align: center;
     font-size: 24px;
     color: black;
@@ -27,3 +19,12 @@ h1 {
     width: 100%;
     margin-bottom: 20px;
 }
+
+/* Στυλ για το χάρτη */
+#map {
+    height: 300px;  /* Ύψος χάρτη */
+    width: 450px;    /* Πλάτος χάρτη */
+    border: 1px solid #ddd; /* Ελαφρύ περίγραμμα γύρω από τον χάρτη */
+}
+
+

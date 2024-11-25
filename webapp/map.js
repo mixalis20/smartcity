@@ -1,12 +1,21 @@
-// Δημιουργία χάρτη
-var map = L.map('map').setView([40.6401, 22.9444], 12); // Συντεταγμένες για Θεσσαλονίκη
+// Δημιουργία χάρτη με OpenStreetMap μέσω του Leaflet.js
+var map = L.map('map').setView([40.6401, 22.9444], 13); // Θεσσαλονίκη, Ελλάδα
 
-// Προσθήκη του χάρτη OSM
+// Χρησιμοποιούμε τον tile layer του OpenStreetMap
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Προσθήκη marker στη Θεσσαλονίκη
-L.marker([40.6401, 22.9444]).addTo(map)
-    .bindPopup('Θεσσαλονίκη')
-    .openPopup();
+// Συντεταγμένες για τον Λευκό Πύργο και τη Ροτόντα
+var whiteTower = L.marker([40.633233, 22.953213]).addTo(map)
+    .bindPopup("<b>Ροτοντα</b>");
+
+var rotunda = L.marker([40.626238, 22.949157]).addTo(map)
+    .bindPopup("<b>Λευκός Πύργος</b>");
+
+var rotunda = L.marker([40.624082, 22.950343]).addTo(map)
+    .bindPopup("<b>ΑΓΑΛΜΑ ΜΕΓΑΛΟΥ ΑΛΕΞΑΝΔΡΟΥ</b>");
+var rotunda = L.marker([40.638244, 22.959717]).addTo(map)
+    .bindPopup("<b>ΚΗΠΟΙ ΤΟΥ ΠΑΣΑ</b>");
+var rotunda = L.marker([40.632152, 22.951896]).addTo(map)
+    .bindPopup("<b>ΑΨΙΔΑ ΤΟΥ ΓΑΛΕΡΙΟΥ</b>");
