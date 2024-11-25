@@ -45,3 +45,14 @@ rotunda.on('click', function () {
     window.location.href = 'gallery.html?location=Ροτόντα'; // Ανακατεύθυνση με παράμετρο
 });
    
+
+fetch('md.json')
+    .then(response => response.json())
+    .then(data => {
+        data.forEach(location => {
+            console.log(`Τίτλος: ${location.title}`);
+            console.log(`Περιγραφή: ${location.description}`);
+            console.log(`Συντεταγμένες: ${location.lat}, ${location.lon}`);
+        });
+    })
+    .catch(error => console.log('Σφάλμα φόρτωσης:', error));
