@@ -15,8 +15,15 @@ async function loadPlaces() {
 
         // Προσθήκη σημείων στον χάρτη από το JSON
         places.forEach(function(place) {
+            // Δημιουργία του περιεχομένου του Popup
+            var popupContent = "<b>" + place.title + "</b><br>" + place.description;
+            
+            // Προσθήκη κουμπιού για ανακατεύθυνση
+            popupContent += '<br><a href="gallery.html" class="btn btn-primary" target="_blank">Δες τη Γκαλερί</a>';
+            
+            // Δημιουργία του marker και προσθήκη του στον χάρτη
             L.marker([place.lat, place.lon]).addTo(map)
-                .bindPopup("<b>" + place.title + "</b><br>" + place.description);
+                .bindPopup(popupContent); // Σύνδεση του περιεχομένου στο popup
         });
 
     } catch (error) {
@@ -26,3 +33,4 @@ async function loadPlaces() {
 
 // Κλήση της συνάρτησης για να φορτωθούν τα δεδομένα και να προστεθούν στον χάρτη
 loadPlaces();
+
