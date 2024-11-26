@@ -13,3 +13,12 @@ body {
     font-weight: bold;
     text-transform: uppercase;
   }
+
+.container p{
+  margin: 0 auto;
+  max-width: 1000px;
+  padding-right: 10px;
+  height: 800px;
+  width: fit-content;
+  background-color: antiquewhite;
+}
