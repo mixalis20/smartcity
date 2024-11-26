@@ -34,10 +34,82 @@
     {
         "title": "Wi-Fi Σημείο 5",
         "description": "Δημόσιο Wi-Fi " ,
-        "lat": 40.635943,
-        "lon": 22.943699,
+        "lat": 40.632389,
+        "lon": 22.941068,
         "type": "wifi",
         "id": 5
+    },
+    {
+        "title": "Wi-Fi Σημείο 6",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.639049,
+        "lon": 22.957950,
+        "type": "wifi",
+        "id": 6
+    },
+    {
+        "title": "Wi-Fi Σημείο 7",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.637155,
+        "lon": 22.965047,
+        "type": "wifi",
+        "id": 7
+    },
+    {
+        "title": "Wi-Fi Σημείο 8",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.648454,
+        "lon": 22.946770,
+        "type": "wifi",
+        "id": 8
+    },
+    {
+        "title": "Wi-Fi Σημείο 9",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.642720,
+        "lon": 22.938922,
+        "type": "wifi",
+        "id": 9
+    },
+    {
+        "title": "Wi-Fi Σημείο 10",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.641125,
+        "lon": 22.935215,
+        "type": "wifi",
+        "id": 10
+    },
+    {
+        "title": "Wi-Fi Σημείο 11",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.646288,
+        "lon": 22.920780,
+        "type": "wifi",
+        "id": 11
+    },
+    {
+        "title": "Wi-Fi Σημείο 12",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.645389,
+        "lon": 22.924588,
+        "type": "wifi",
+        "id": 12
+    },
+    {
+        "title": "Wi-Fi Σημείο 13",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.647440,
+        "lon":22.935406,
+        "type": "wifi",
+        "id": 13
+    },
+    {
+        "title": "Wi-Fi Σημείο 14",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.638214,
+        "lon":22.934496,
+        "type": "wifi",
+        "id": 14
     },
     {
         "title": "Πάρκινγκ 1 ",
@@ -46,7 +118,8 @@
         "lon": 22.933308,
         "type": "parking",
         "id": 3
-    },
+    }, 
+    
     {
         "title": "Πάρκινγκ 2 ",
         "description": "Δημόσιο Πάρκινγκ",
