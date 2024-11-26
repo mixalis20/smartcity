@@ -19,8 +19,7 @@ async function loadPlaces() {
             var popupContent = "<b>" + place.title + "</b><br>" + place.description;
             
             // Προσθήκη κουμπιού για ανακατεύθυνση στη φωτογραφία
-            // Χρησιμοποιούμε πλήρη URL της φωτογραφίας
-            popupContent += '<br><a href="images/' + place.imageUrl + '" class="btn btn-primary" target="_blank">Δες τη Φωτογραφία</a>';
+            popupContent += '<br><a href="gallery.html#sight' + place.id + '" class="btn btn-primary">Δες το στην Γκαλερί</a>';
             
             // Δημιουργία του marker και προσθήκη του στον χάρτη
             L.marker([place.lat, place.lon]).addTo(map)
@@ -34,3 +33,4 @@ async function loadPlaces() {
 
 // Κλήση της συνάρτησης για να φορτωθούν τα δεδομένα και να προστεθούν στον χάρτη
 loadPlaces();
+
