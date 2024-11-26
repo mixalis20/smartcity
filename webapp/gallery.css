@@ -4,25 +4,86 @@ body {
   background-attachment: fixed;
 }
 
+/* Κεντρική διάταξη container */
 .container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
   justify-items: center;
 }
-.img-sights{
-  margin: 5px;
-  border: 1px solid black;
-  width: 390px;
-  justify-items: center;
-  background-color:#fff;
 
-}
-
-.container .img-sights h1{
+/* Στυλ για κάθε block εικόνας και κειμένου */
+.img-sights {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transform: scale(1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
   text-align: center;
+  padding: 20px;
+  width: 100%;
 }
 
-.container .img-sights p{
-    color: black;
-    text-align: left;
-    margin-left: 4px;
-    
+/* Στυλ τίτλου */
+.img-sights h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Στυλ εικόνας */
+.img-sights img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Στυλ κειμένου */
+.img-sights p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: left;
+  margin-top: 10px;
+}
+
+/* Στυλ hover για το περιεχόμενο */
+.img-sights:hover {
+  transform: scale(1.05);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Στυλ hover για την εικόνα */
+.img-sights img:hover {
+  transform: scale(1.1);
+}
+
+/* Στυλ για το container των εικόνων */
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
+  padding-right: 10px;
+  height: 800px;
+  width: fit-content;
+}
+
+/* Ρυθμίσεις για το responsive design */
+@media (max-width: 768px) {
+  .img-sights {
+      padding: 15px;
+  }
+
+  .img-sights h1 {
+      font-size: 22px;
+  }
+
+  .img-sights p {
+      font-size: 14px;
+  }
 }
