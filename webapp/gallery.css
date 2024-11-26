@@ -1,16 +1,24 @@
 body {
   background-image: url(background.jpg);
   background-repeat: no-repeat;
+  width: 100%;
   background-attachment: fixed;
 }
 
+
+
 /* Κεντρική διάταξη container */
 .container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
-  padding: 20px;
-  justify-items: center;
+  padding: 20px; */
+  justify-items: center; 
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+
 }
 
 /* Στυλ για κάθε block εικόνας και κειμένου */
@@ -19,12 +27,12 @@ body {
   border-radius: 10px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transform: scale(1);
+  /* transform: scale(1); */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
   text-align: center;
-  padding: 20px;
+  /* padding: 20px; */
   height: 400px;
-  width: 50%;
+  width: 200px;
 }
 
 /* Στυλ τίτλου */
@@ -38,8 +46,8 @@ body {
 
 /* Στυλ εικόνας */
 .img-sights img {
-  width: 100%;
-  height: auto;
+  width: 150px;
+  height: 200px;
   border-radius: 8px;
   margin-bottom: 15px;
   transition: transform 0.3s ease-in-out;
@@ -66,13 +74,13 @@ body {
 }
 
 /* Στυλ για το container των εικόνων */
-.container {
+/* .container {
   margin: 0 auto;
   max-width: 1000px;
   padding-right: 10px;
   height: 800px;
   width: fit-content;
-}
+} */
 
 /* Ρυθμίσεις για το responsive design */
 @media (max-width: 768px) {
