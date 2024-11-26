@@ -1,20 +1,28 @@
-.body {
+body {
   background-image: url(background.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
-.desc{
-  padding: 15px;
-  text-align: center;
-  color: aqua;
 
-}
 .container {
   justify-items: center;
-  background-image: url(background.jpg);
 }
 .img-sights{
   margin: 5px;
   border: 1px solid black;
   width: 390px;
   justify-items: center;
-  background-color: black;
+  background-color:#fff;
+
+}
+
+.container .img-sights h1{
+  text-align: center;
+}
+
+.container .img-sights p{
+    color: black;
+    text-align: left;
+    margin-left: 4px;
+    
 }
