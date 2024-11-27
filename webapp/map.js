@@ -47,7 +47,9 @@ var parkingIcon = L.icon({
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
-});
+}); 
+
+
 
 // Φόρτωση των δεδομένων από το αρχείο JSON
 fetch('data.json')
@@ -68,3 +70,27 @@ fetch('data.json')
         });
     })
     .catch(error => console.error('Error loading the JSON data:', error));
+
+
+    fetch('data2.json')
+    .then(response => response.json())
+    .then(places => {
+        // Προσθήκη σημείων στον χάρτη
+        places.forEach(function(place) {
+            // Προσθήκη marker για κάθε τοποθεσία
+            var marker = L.marker([place.lat, place.lon]).addTo(map)
+                .bindPopup("<b>" + place.title + "</b><br>" + place.description);
+
+            // Επιλογή διαφορετικού εικονιδίου ανάλογα με τον τύπο ("pharmacy")
+            if (place.type === "pharmacy") {
+                marker.setIcon(pharmacyIcon); // Σημεία φαρμακείων
+            }
+        });
+    })
+    .catch(error => console.error('Error loading the JSON data:', error));
+    var pharmacyIcon = L.icon({
+        iconUrl: 'pharmacy.png', // Εικονίδιο για τα φαρμακεία
+        iconSize: [32, 32], // Μέγεθος εικονιδίου
+        iconAnchor: [16, 32], // Σημείο του εικονιδίου
+        popupAnchor: [0, -32] // Σημείο για το popup
+    });

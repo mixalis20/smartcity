@@ -6,21 +6,40 @@ body {
   }
 
 
-  .img-sights h1 {
-    color: black;
-    font-size: 24px;
-    margin-bottom: 10px;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-
-p{
-  color: black;
-  background-color: wheat;
-  text-align: left;
+  .img-sights {
+    display: flex; /* Χρησιμοποιούμε flexbox για την διάταξη */
+    flex-direction: column; /* Διατάσσουμε τα στοιχεία κάθετα (το h1 πάνω από το κείμενο) */
+    justify-content: center; /* Κεντράρισμα κατακόρυφα */
+    align-items: center; /* Κεντράρισμα οριζόντια */
+    text-align: center; /* Κεντράρισμα του περιεχομένου */
+    padding: 30px 0; /* Περίθωρο γύρω από το περιεχόμενο */
+    background-color: #f4f4f4; /* Φόντο για όλη την περιοχή */
+    border-radius: 10px; /* Στρογγυλεμένες γωνίες για την περιοχή */
+    height: 50%; /* Για να επεκταθεί και να καλύψει όλο το ύψος */
 }
 
-.img-sights{
-  justify-content: center;
+.img-sights h1 {
+    color: #333; /* Μαύρο, πιο απαλή απόχρωση */
+    font-size: 36px; /* Μεγαλύτερο μέγεθος για καλύτερη αναγνωσιμότητα */
+    margin-bottom: 15px; /* Κενό κάτω από τον τίτλο */
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center; /* Κεντράρισμα του τίτλου */
+    letter-spacing: 2px; /* Διάστημα ανάμεσα στα γράμματα για πιο σύγχρονο look */
+    font-family: 'Arial', sans-serif; /* Κομψή γραμματοσειρά */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1); /* Ήπια σκιά για να ξεχωρίζει */
+}
+
+p {
+    color: #555; /* Σκούρο γκρι για πιο απαλή εμφάνιση */
+    background-color: #f9f9f9; /* Ελαφρύ φόντο για να αναδεικνύει το κείμενο */
+    text-align: justify; /* Ευθυγράμμιση του κειμένου για πιο καθαρή εμφάνιση */
+    font-size: 16px; /* Μέγεθος γραμματοσειράς για άνετη ανάγνωση */
+    line-height: 1.8; /* Ύψος γραμμής για να είναι πιο ευανάγνωστο */
+    padding: 20px; /* Περίγραμμα γύρω από το κείμενο */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες για πιο φιλική εμφάνιση */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Ελαφριά σκιά γύρω από το παράγραφο */
+    font-family: 'Roboto', sans-serif; /* Μια καθαρή και μοντέρνα γραμματοσειρά */
+    max-width: 800px; /* Περιορισμός πλάτους για καλύτερη εμφάνιση */
 }
 

@@ -110,6 +110,46 @@
         "lon":22.934496,
         "type": "wifi",
         "id": 14
+    }, 
+    {
+        "title": "Wi-Fi Σημείο 15",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.610175,
+        "lon":22.950083,
+        "type": "wifi",
+        "id": 15
+    }, 
+    {
+        "title": "Wi-Fi Σημείο 16",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.607088,
+        "lon":22.963124,
+        "type": "wifi",
+        "id": 16
+    },
+    {
+        "title": "Wi-Fi Σημείο 17",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.612795,
+        "lon":22.962287,
+        "type": "wifi",
+        "id": 17
+    }, 
+    {
+        "title": "Wi-Fi Σημείο 18",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.608653,
+        "lon":22.966117,
+        "type": "wifi",
+        "id": 18
+    }, 
+    {
+        "title": "Wi-Fi Σημείο 19",
+        "description": "Δημόσιο Wi-Fi " ,
+        "lat": 40.608545,
+        "lon":22.968193,
+        "type": "wifi",
+        "id": 19
     },
     {
         "title": "Πάρκινγκ 1 ",
