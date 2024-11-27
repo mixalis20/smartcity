@@ -36,7 +36,7 @@ loadPlaces();
 
 // Εικονίδια για Wi-Fi και Πάρκινγκ
 var wifiIcon = L.icon({
-    iconUrl: 'wifi-icon.png', // Αντικατέστησε με την εικόνα για Wi-Fi
+    iconUrl: 'wifi-icon.webp', // Αντικατέστησε με την εικόνα για Wi-Fi
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
@@ -94,3 +94,28 @@ fetch('data.json')
         iconAnchor: [16, 32], // Σημείο του εικονιδίου
         popupAnchor: [0, -32] // Σημείο για το popup
     });
+
+
+    // Φόρτωση των δεδομένων από το αρχείο JSON
+fetch('data3.json')
+.then(response => response.json())
+.then(places => {
+    // Προσθήκη σημείων στον χάρτη
+    places.forEach(function(place) {
+        // Προσθήκη marker για κάθε τοποθεσία
+        var marker = L.marker([place.lat, place.lon]).addTo(map)
+            .bindPopup("<b>" + place.title + "</b><br>" + place.description);
+
+        // Επιλογή διαφορετικού εικονιδίου ανάλογα με τον τύπο ("atm")
+        if (place.type === "atm") {
+            marker.setIcon(atmIcon); // Σημεία ΑΤΜ
+        }
+    });
+})
+.catch(error => console.error('Error loading the JSON data:', error));
+var atmIcon = L.icon({
+    iconUrl: 'atm.webp', // Εικονίδιο ΑΤΜ
+    iconSize: [32, 32], // Μέγεθος εικονιδίου
+    iconAnchor: [16, 32], // Σημείο του εικονιδίου
+    popupAnchor: [0, -32] // Σημείο για το popup
+});

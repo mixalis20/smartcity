@@ -1,30 +1,15 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-image: url(background.jpg);
+
+html, body {
+    height: 100%;
+    margin: 0;  /* Αφαιρεί τα περιθώρια */
 }
 
 
-h4 {
-    text-align: center;
-    font-size: 24px;
-    color: black;
-    position: absolute;
-    top: 20px;
-    width: 100%;
-    margin-bottom: 20px;
-}
 
 /* Στυλ για το χάρτη */
 #map {
-    height: 550px;  /* Ύψος χάρτη */
-    width: 600px;    /* Πλάτος χάρτη */
-    border: 1px solid #ddd; /* Ελαφρύ περίγραμμα γύρω από τον χάρτη */
+    height: 100vh; /* Ύψος: 100% του ύψους του παραθύρου */
+    width: 100%;  
 }
 
 
