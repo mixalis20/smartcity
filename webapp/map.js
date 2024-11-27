@@ -162,7 +162,7 @@ button.onclick = function() {
 };
 
 // Αντικατέστησε το YOUR_API_KEY με το πραγματικό API Key σου από το OpenWeatherMap
-var url = "weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5"
+var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=el`;
 
 
 fetch(url)
@@ -181,7 +181,7 @@ fetch(url)
         });
 
 
-        var tempButton = document.getElementById('temperature-toggle');
-        tempButton.onclick = function() {
-            getUserLocation();
-        };
+var tempButton = document.getElementById('temperature-toggle');
+tempButton.onclick = function() {
+    getUserLocation();
+};
