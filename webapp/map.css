@@ -13,3 +13,31 @@ html, body {
 }
 
 
+
+ /* Στυλ για το κουμπί αλλαγής θέματος */
+ #theme-container {
+    position: absolute;
+    top: 70px; /* Απόσταση από την κορυφή του χάρτη για να τοποθετηθεί κάτω από το legend */
+    right: 10px;
+    z-index: 999;
+    padding: 10px;
+}
+
+#theme-toggle {
+    padding: 10px 15px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-top: 100px;
+}
+
+/* Στυλ για το Legend */
+.leaflet-control-layers {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    color: #333;
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid #ccc;
+    padding: 10px;
+}   
+

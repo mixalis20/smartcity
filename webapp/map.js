@@ -119,3 +119,69 @@ var atmIcon = L.icon({
     iconAnchor: [16, 32], // Σημείο του εικονιδίου
     popupAnchor: [0, -32] // Σημείο για το popup
 });
+
+var legend = L.control({ position: 'topright' });
+
+legend.onAdd = function(map) {
+    var div = L.DomUtil.create('div', 'leaflet-control-layers');
+    div.innerHTML = '<strong>Σημεία Χάρτη:</strong><br>'
+       + '<span><img src="atm.webp" style="width: 20px; height: 20px; margin-right: 10px;" /> ATM</span><br>'
+        + '<span><img src="pharmacy.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Φαρμακεια</span><br>'
+         + '<span><img src="wifi-icon.webp" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Wifi</span><br>'
+          + '<span><img src="parking-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Παρκινγκ</span><br>'
+    return div;
+};
+
+legend.addTo(map);
+
+// Light και Dark Tile Layers
+var lightLayer = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+});
+
+var darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://carto.com/attributions">CartoDB</a>'
+});
+
+// Προσθήκη του Light Layer αρχικά
+lightLayer.addTo(map);
+
+// Δημιουργία του κουμπιού για την αλλαγή του θέματος
+var button = document.getElementById('theme-toggle');
+var isLight = true; // Αρχικά το theme είναι Light
+
+button.onclick = function() {
+    if (isLight) {
+        map.removeLayer(lightLayer);  // Αφαίρεση του Light Layer
+        darkLayer.addTo(map);         // Προσθήκη του Dark Layer
+    } else {
+        map.removeLayer(darkLayer);   // Αφαίρεση του Dark Layer
+        lightLayer.addTo(map);        // Προσθήκη του Light Layer
+    }
+    isLight = !isLight; // Αλλάζει το flag
+};
+
+// Αντικατέστησε το YOUR_API_KEY με το πραγματικό API Key σου από το OpenWeatherMap
+var url = "weathermap?basemap=map&cities=true&layer=temperature&lat=30&lon=-20&zoom=5"
+
+
+fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var temperature = data.main.temp;  // Θερμοκρασία σε °C
+            var cityName = data.name;  // Όνομα πόλης
+            var tempText = `Η τρέχουσα θερμοκρασία στην ${cityName} είναι ${temperature}°C.`;
+            
+            // Εμφάνιση της θερμοκρασίας στο κουμπί
+            var tempButton = document.getElementById('temperature-toggle');
+            tempButton.textContent = tempText;
+        })
+        .catch(error => {
+            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας:', error);
+        });
+
+
+        var tempButton = document.getElementById('temperature-toggle');
+        tempButton.onclick = function() {
+            getUserLocation();
+        };
