@@ -13,12 +13,11 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 20px;
   padding: 20px; */
-  justify-items: center; 
-  display: flex;
   width: 100%;
   flex-wrap: wrap;
   justify-content: space-evenly;
-
+  float: left;
+  margin: 5px;
 }
 
 
@@ -32,8 +31,10 @@ body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
   text-align: center;
   /* padding: 20px; */
-  height: 400px;
-  width: 200px;
+  height: 300px;
+  width: 400px;
+  margin: 5px;
+  float: left;
 }
 
 /* Στυλ τίτλου */
@@ -98,4 +99,5 @@ body {
       font-size: 14px;
   }
 }
+
 

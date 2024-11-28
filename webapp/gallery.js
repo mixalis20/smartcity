@@ -17,6 +17,7 @@ async function generateList() {
     let title = document.createElement("h1");
     title.innerText = data[i].title; // Εισαγωγή τίτλου
     el.appendChild(title);
+    
 
     // Δημιουργία της εικόνας και προσθήκη της στο div
     let image = document.createElement("img");
