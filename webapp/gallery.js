@@ -1,21 +1,52 @@
+
+
 const container = document.getElementById("sights");
 
 async function generateList() {
   const data = await fetch("./md.json").then((response) => response.json());
+  container.innerHTML = "";  // Καθαρίζουμε το container πριν προσθέσουμε τα νέα στοιχεία
+  
   const length = data.length;
   
-  for(let i=0;i<length;i++){
-    //create divs
+  for (let i = 0; i < length; i++) {
+    // Δημιουργία του div για κάθε τοποθεσία
     let el = document.createElement("div");
-    el.innerText = data[i].title;
-    container.appendChild(el)
-    el.className = 'container'
-    el.className = 'img-sights'
-    
+    el.className = 'img-sights'; // Εφαρμογή της κλάσης για τα blocks
+
+    // Δημιουργία του τίτλου και προσθήκη του στο div
+    let title = document.createElement("h1");
+    title.innerText = data[i].title; // Εισαγωγή τίτλου
+    el.appendChild(title);
+
+    // Δημιουργία της εικόνας και προσθήκη της στο div
+    let image = document.createElement("img");
+    image.src = data[i].image; // Η εικόνα φορτώνεται από το πεδίο 'image' του JSON
+    image.alt = data[i].title; // Εναλλακτικό κείμενο για την εικόνα
+    el.appendChild(image);
+
+    // Προσθήκη του div στο container
+    container.appendChild(el);
+
+    // Προσθήκη listener για το κλικ
+    el.addEventListener("click", function() {
+      // Ανακατεύθυνση στη σελίδα με βάση το id της τοποθεσίας (π.χ., sights1.html, sights2.html)
+      window.location.href = `sight${data[i].id}.html`;
+    });
   }
 }
 
+// Κλήση της συνάρτησης για να δημιουργηθούν τα στοιχεία
 generateList();
+
+
+
+
+
+
+
+
+
+
 
 // if (container) {
 //   for (let i = 0; i < 1; i++) {
