@@ -34,7 +34,7 @@ async function loadPlaces() {
 // Κλήση της συνάρτησης για να φορτωθούν τα δεδομένα και να προστεθούν στον χάρτη
 loadPlaces();
 
-// Εικονίδια για Wi-Fi και Πάρκινγκ
+// Εικονίδια για Wi-Fi, Πάρκινγκ, Φαρμακεία, και ΑΤΜ
 var wifiIcon = L.icon({
     iconUrl: 'wifi-icon.webp', // Αντικατέστησε με την εικόνα για Wi-Fi
     iconSize: [32, 32],
@@ -47,91 +47,54 @@ var parkingIcon = L.icon({
     iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
-}); 
-
-
-
-// Φόρτωση των δεδομένων από το αρχείο JSON
-fetch('data.json')
-    .then(response => response.json())
-    .then(places => {
-        // Προσθήκη σημείων στον χάρτη
-        places.forEach(function(place) {
-            // Προσθήκη marker για κάθε τοποθεσία
-            var marker = L.marker([place.lat, place.lon]).addTo(map)
-                .bindPopup("<b>" + place.title + "</b><br>" + place.description);
-
-            // Επιλογή διαφορετικού εικονιδίου ανάλογα με τον τύπο ("wifi" ή "parking")
-            if (place.type === "wifi") {
-                marker.setIcon(wifiIcon); // Σημεία Wi-Fi
-            } else if (place.type === "parking") {
-                marker.setIcon(parkingIcon); // Σημεία Πάρκινγκ
-            }
-        });
-    })
-    .catch(error => console.error('Error loading the JSON data:', error));
-
-
-    fetch('data2.json')
-    .then(response => response.json())
-    .then(places => {
-        // Προσθήκη σημείων στον χάρτη
-        places.forEach(function(place) {
-            // Προσθήκη marker για κάθε τοποθεσία
-            var marker = L.marker([place.lat, place.lon]).addTo(map)
-                .bindPopup("<b>" + place.title + "</b><br>" + place.description);
-
-            // Επιλογή διαφορετικού εικονιδίου ανάλογα με τον τύπο ("pharmacy")
-            if (place.type === "pharmacy") {
-                marker.setIcon(pharmacyIcon); // Σημεία φαρμακείων
-            }
-        });
-    })
-    .catch(error => console.error('Error loading the JSON data:', error));
-    var pharmacyIcon = L.icon({
-        iconUrl: 'pharmacy.png', // Εικονίδιο για τα φαρμακεία
-        iconSize: [32, 32], // Μέγεθος εικονιδίου
-        iconAnchor: [16, 32], // Σημείο του εικονιδίου
-        popupAnchor: [0, -32] // Σημείο για το popup
-    });
-
-
-    // Φόρτωση των δεδομένων από το αρχείο JSON
-fetch('data3.json')
-.then(response => response.json())
-.then(places => {
-    // Προσθήκη σημείων στον χάρτη
-    places.forEach(function(place) {
-        // Προσθήκη marker για κάθε τοποθεσία
-        var marker = L.marker([place.lat, place.lon]).addTo(map)
-            .bindPopup("<b>" + place.title + "</b><br>" + place.description);
-
-        // Επιλογή διαφορετικού εικονιδίου ανάλογα με τον τύπο ("atm")
-        if (place.type === "atm") {
-            marker.setIcon(atmIcon); // Σημεία ΑΤΜ
-        }
-    });
-})
-.catch(error => console.error('Error loading the JSON data:', error));
-var atmIcon = L.icon({
-    iconUrl: 'atm.webp', // Εικονίδιο ΑΤΜ
-    iconSize: [32, 32], // Μέγεθος εικονιδίου
-    iconAnchor: [16, 32], // Σημείο του εικονιδίου
-    popupAnchor: [0, -32] // Σημείο για το popup
 });
 
-var legend = L.control({ position: 'topright' });
+var pharmacyIcon = L.icon({
+    iconUrl: 'pharmacy.png', // Εικονίδιο για τα φαρμακεία
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+});
 
+var atmIcon = L.icon({
+    iconUrl: 'atm.webp', // Εικονίδιο ΑΤΜ
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32]
+});
+
+// Φόρτωση δεδομένων από JSON για Wi-Fi, Πάρκινγκ, Φαρμακεία, και ΑΤΜ
+function loadMarkers(jsonFile, icon) {
+    fetch(jsonFile)
+        .then(response => response.json())
+        .then(places => {
+            places.forEach(function(place) {
+                var marker = L.marker([place.lat, place.lon]).addTo(map)
+                    .bindPopup("<b>" + place.title + "</b><br>" + place.description);
+                
+                marker.setIcon(icon);
+            });
+        })
+        .catch(error => console.error('Error loading the JSON data:', error));
+}
+
+// Φόρτωση των σημείων από τα δεδομένα
+loadMarkers('data.json', wifiIcon);
+loadMarkers('data2.json', pharmacyIcon);
+loadMarkers('data3.json', atmIcon);
+loadMarkers('data4.json', parkingIcon); // Φόρτωμα και των markers για πάρκινγκ
+
+// Προσθήκη του Legend για τα εικονίδια
+var legend = L.control({ position: 'topright' });
 legend.onAdd = function(map) {
     var div = L.DomUtil.create('div', 'leaflet-control-layers');
     div.innerHTML = '<strong>Σημεία Χάρτη:</strong><br>'
        + '<span><img src="atm.webp" style="width: 20px; height: 20px; margin-right: 10px;" /> ATM</span><br>'
-        + '<span><img src="pharmacy.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Φαρμακεια</span><br>'
-         + '<span><img src="wifi-icon.webp" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Wifi</span><br>'
-          + '<span><img src="parking-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Παρκινγκ</span><br>'
+       + '<span><img src="pharmacy.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Φαρμακεια</span><br>'
+       + '<span><img src="wifi-icon.webp" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Wifi</span><br>'
+       + '<span><img src="parking-icon.png" style="width: 20px; height: 20px; margin-right: 10px;" /> Δημοσιο Παρκινγκ</span><br>';
     return div;
 };
-
 legend.addTo(map);
 
 // Light και Dark Tile Layers
@@ -152,62 +115,74 @@ var isLight = true; // Αρχικά το theme είναι Light
 
 button.onclick = function() {
     if (isLight) {
-        map.removeLayer(lightLayer);  // Αφαίρεση του Light Layer
-        darkLayer.addTo(map);         // Προσθήκη του Dark Layer
+        map.removeLayer(lightLayer);
+        darkLayer.addTo(map);
     } else {
-        map.removeLayer(darkLayer);   // Αφαίρεση του Dark Layer
-        lightLayer.addTo(map);        // Προσθήκη του Light Layer
+        map.removeLayer(darkLayer);
+        lightLayer.addTo(map);
     }
-    isLight = !isLight; // Αλλάζει το flag
+    isLight = !isLight;
 };
 
+// Σημείο εκκίνησης για την αλλαγή θεμάτων (θερμοκρασία και άνεμος)
+var isTemperatureVisible = false;
+var isWindVisible = false;
 
-// Συνάρτηση για λήψη των δεδομένων του καιρού
-function fetchWeatherData(lat, lon) {
-    var apiKey = "f334ce4f82114807a7d72742242811";  // Το API Key από το weatherapi.com
-    var url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&lang=el`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var temperature = data.current.temp_c;  // Θερμοκρασία σε °C
-            var cityName = data.location.name;  // Όνομα πόλης
-            var tempText = `Η τρέχουσα θερμοκρασία στην ${cityName} είναι ${temperature}°C`;
-
-            // Εμφάνιση της θερμοκρασίας σε ένα κουμπί ή οποιοδήποτε άλλο στοιχείο στον HTML
-            var tempButton = document.getElementById('temperature-toggle');
-            tempButton.textContent = tempText;
-        })
-        .catch(error => {
-            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας:', error);
-        });
-}
-
-// Λήψη της τοποθεσίας του χρήστη και κλήση της συνάρτησης για λήψη του καιρού
 function getUserLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
             var lat = position.coords.latitude;
             var lon = position.coords.longitude;
-            fetchWeatherData(lat, lon);  // Κλήση συνάρτησης για λήψη δεδομένων θερμοκρασίας
+            fetchWeatherData(lat, lon);
         }, function(error) {
-            console.error("Δεν ήταν δυνατή η απόκτηση της θέσης του χρήστη: " + error.message);
+            console.error("Σφάλμα κατά την απόκτηση της θέσης του χρήστη: " + error.message);
         });
     } else {
         console.log("Η γεωτοποθέτηση δεν υποστηρίζεται από τον browser.");
     }
 }
 
-// Κλήση της συνάρτησης για λήψη καιρού κατά την αρχική φόρτωση
-var lat = 40.632139;  // Συντεταγμένες Θεσσαλονίκης
-var lon = 22.951866;
-fetchWeatherData(lat, lon); // Εμφάνιση της θερμοκρασίας
+function fetchWeatherData(lat, lon) {
+    var apiKey =  "f334ce4f82114807a7d72742242811";
+    var url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&lang=el`;
 
-// Κλήση της συνάρτησης για λήψη καιρού μέσω του κουμπιού
-var tempButton = document.getElementById('temperature-toggle');
-tempButton.onclick = function() {
-    getUserLocation();  // Κλήση για να πάρεις τη θερμοκρασία από τη θέση του χρήστη
-};
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var temperature = data.current.temp_c;
+            var windSpeed = data.current.wind_kph;
+            var windDirection = data.current.wind_dir;
+            var cityName = data.location.name;
 
+            var tempText = ` ${cityName}${temperature}°C.`;
+            var windText = ` ${windSpeed}${windDirection}.`;
 
+            var tempButton = document.getElementById('temperature-toggle');
+            var windButton = document.getElementById('wind-toggle');
 
+            tempButton.onclick = function() {
+                if (isTemperatureVisible) {
+                    tempButton.textContent = "Θερμοκρασία";
+                } else {
+                    tempButton.textContent = tempText;
+                }
+                isTemperatureVisible = !isTemperatureVisible;
+            };
+
+            windButton.onclick = function() {
+                if (isWindVisible) {
+                    windButton.textContent = "Άνεμος";
+                } else {
+                    windButton.textContent = windText;
+                }
+                isWindVisible = !isWindVisible;
+            };
+        })
+        .catch(error => {
+            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας και ανέμου:', error);
+        });
+}
+
+// Κουμπί για τη λήψη θέσης και εμφάνιση θερμοκρασίας
+document.getElementById('temperature-toggle').onclick = getUserLocation;
+document.getElementById('wind-toggle').onclick = getUserLocation;
