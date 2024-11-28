@@ -161,27 +161,42 @@ button.onclick = function() {
     isLight = !isLight; // Αλλάζει το flag
 };
 
-// Αντικατέστησε το YOUR_API_KEY με το πραγματικό API Key σου από το OpenWeatherMap
-var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=el`;
 
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+            var lat = position.coords.latitude;
+            var lon = position.coords.longitude;
+            fetchWeatherData(lat, lon);  // Κλήση συνάρτησης για λήψη δεδομένων θερμοκρασίας
+        }, function(error) {
+            console.error("Δεν ήταν δυνατή η απόκτηση της θέσης του χρήστη: " + error.message);
+        });
+    } else {
+        console.log("Η γεωτοποθέτηση δεν υποστηρίζεται από τον browser.");
+    }
+}
 
-fetch(url)
+function fetchWeatherData(lat, lon) {
+    var apiKey = "f334ce4f82114807a7d72742242811"
+    var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=el`;
+
+    fetch(url)
         .then(response => response.json())
         .then(data => {
             var temperature = data.main.temp;  // Θερμοκρασία σε °C
             var cityName = data.name;  // Όνομα πόλης
             var tempText = `Η τρέχουσα θερμοκρασία στην ${cityName} είναι ${temperature}°C.`;
-            
-            // Εμφάνιση της θερμοκρασίας στο κουμπί
+
+            // Εμφάνιση της θερμοκρασίας σε ένα κουμπί ή οποιοδήποτε άλλο στοιχείο στον HTML
             var tempButton = document.getElementById('temperature-toggle');
             tempButton.textContent = tempText;
         })
         .catch(error => {
             console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας:', error);
         });
-
-
+}
 var tempButton = document.getElementById('temperature-toggle');
 tempButton.onclick = function() {
     getUserLocation();
 };
+
