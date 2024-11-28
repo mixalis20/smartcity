@@ -17,7 +17,6 @@ async function generateList() {
     let title = document.createElement("h1");
     title.innerText = data[i].title; // Εισαγωγή τίτλου
     el.appendChild(title);
-    
 
     // Δημιουργία της εικόνας και προσθήκη της στο div
     let image = document.createElement("img");
@@ -25,8 +24,22 @@ async function generateList() {
     image.alt = data[i].title; // Εναλλακτικό κείμενο για την εικόνα
     el.appendChild(image);
 
+
     // Προσθήκη του div στο container
     container.appendChild(el);
+    
+    
+    let description = document.createElement ("description");
+    description.innerText = data[i].description;
+    el.appendChild(description);
+
+    var button = document.createElement("button");
+    button.innerHTML = "more";
+
+// 2. Append somewhere
+    var body = document.getElementsByTagName("description")[0];
+    description.appendChild(button);
+
 
     // Προσθήκη listener για το κλικ
     el.addEventListener("click", function() {
@@ -36,8 +49,11 @@ async function generateList() {
   }
 }
 
+
 // Κλήση της συνάρτησης για να δημιουργηθούν τα στοιχεία
 generateList();
+ 
+
 
 
 
