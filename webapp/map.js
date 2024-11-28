@@ -162,6 +162,28 @@ button.onclick = function() {
 };
 
 
+// Συνάρτηση για λήψη των δεδομένων του καιρού
+function fetchWeatherData(lat, lon) {
+    var apiKey = "f334ce4f82114807a7d72742242811";  // Το API Key από το weatherapi.com
+    var url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&lang=el`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            var temperature = data.current.temp_c;  // Θερμοκρασία σε °C
+            var cityName = data.location.name;  // Όνομα πόλης
+            var tempText = `Η τρέχουσα θερμοκρασία στην ${cityName} είναι ${temperature}°C`;
+
+            // Εμφάνιση της θερμοκρασίας σε ένα κουμπί ή οποιοδήποτε άλλο στοιχείο στον HTML
+            var tempButton = document.getElementById('temperature-toggle');
+            tempButton.textContent = tempText;
+        })
+        .catch(error => {
+            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας:', error);
+        });
+}
+
+// Λήψη της τοποθεσίας του χρήστη και κλήση της συνάρτησης για λήψη του καιρού
 function getUserLocation() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -176,27 +198,16 @@ function getUserLocation() {
     }
 }
 
-function fetchWeatherData(lat, lon) {
-    var apiKey = "f334ce4f82114807a7d72742242811"
-    var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric&lang=el`;
+// Κλήση της συνάρτησης για λήψη καιρού κατά την αρχική φόρτωση
+var lat = 40.632139;  // Συντεταγμένες Θεσσαλονίκης
+var lon = 22.951866;
+fetchWeatherData(lat, lon); // Εμφάνιση της θερμοκρασίας
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var temperature = data.main.temp;  // Θερμοκρασία σε °C
-            var cityName = data.name;  // Όνομα πόλης
-            var tempText = `Η τρέχουσα θερμοκρασία στην ${cityName} είναι ${temperature}°C.`;
-
-            // Εμφάνιση της θερμοκρασίας σε ένα κουμπί ή οποιοδήποτε άλλο στοιχείο στον HTML
-            var tempButton = document.getElementById('temperature-toggle');
-            tempButton.textContent = tempText;
-        })
-        .catch(error => {
-            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας:', error);
-        });
-}
+// Κλήση της συνάρτησης για λήψη καιρού μέσω του κουμπιού
 var tempButton = document.getElementById('temperature-toggle');
 tempButton.onclick = function() {
-    getUserLocation();
+    getUserLocation();  // Κλήση για να πάρεις τη θερμοκρασία από τη θέση του χρήστη
 };
+
+
 

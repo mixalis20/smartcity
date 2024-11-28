@@ -14,30 +14,73 @@ html, body {
 
 
 
- /* Στυλ για το κουμπί αλλαγής θέματος */
- #theme-container {
+/* Στυλ για το container των κουμπιών */
+#button-container {
     position: absolute;
-    top: 70px; /* Απόσταση από την κορυφή του χάρτη για να τοποθετηθεί κάτω από το legend */
+    top: 70px;  /* Ξεκινάει από την κορυφή */
     right: 10px;
     z-index: 999;
-    padding: 10px;
+    display: flex; /* Χρησιμοποιούμε flexbox για να τα τοποθετήσουμε κάθετα */
+    flex-direction: column; /* Τοποθετούμε τα κουμπιά το ένα κάτω από το άλλο */
+    gap: 10px; /* Απόσταση μεταξύ των κουμπιών */
+    direction: rtl; /* Κατεύθυνση γραμματοσειράς: από δεξιά προς τα αριστερά */
+    margin-top: 90px;
 }
 
+/* Στυλ για το κουμπί αλλαγής θέματος */
 #theme-toggle {
-    padding: 10px 15px;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    padding: 12px 20px;
+    background-color: #007bff; /* Μπλε χρώμα για το κουμπί */
+    color: white;
+    border: none;
+    border-radius: 25px; /* Στρογγυλεμένες γωνίες */
+    font-size: 16px;
+    font-weight: bold;
     cursor: pointer;
-    margin-top: 100px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά για βάθος */
 }
 
-/* Στυλ για το Legend */
-.leaflet-control-layers {
-    font-family: Arial, sans-serif;
-    font-size: 14px;
-    color: #333;
-    background-color: rgba(255, 255, 255, 0.7);
-    border: 1px solid #ccc;
-    padding: 10px;
-}   
+#theme-toggle:hover {
+    background-color: #0056b3; /* Σκούρο μπλε όταν το κουμπί hover */
+    transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
+    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4); /* Εντονότερη σκιά */
+}
 
+#theme-toggle:active {
+    transform: translateY(2px); /* Όταν το κουμπί πατηθεί, κατεβαίνει λίγο */
+    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά όταν πατηθεί */
+}
+
+/* Στυλ για το κουμπί θερμοκρασίας */
+#temperature-toggle {
+    padding: 12px 20px;
+    background-color: #28a745; /* Πράσινο χρώμα για το κουμπί */
+    color: white;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά για βάθος */
+}
+
+#temperature-toggle:hover {
+    background-color: #218838; /* Σκούρο πράσινο όταν το κουμπί hover */
+    transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
+    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4); /* Εντονότερη σκιά */
+}
+
+#temperature-toggle:active {
+    transform: translateY(2px); /* Όταν το κουμπί πατηθεί, κατεβαίνει λίγο */
+    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά όταν πατηθεί */
+}
+
+/* Responsive: Στυλ για κινητές συσκευές */
+@media (max-width: 768px) {
+    #theme-toggle, #temperature-toggle {
+        padding: 10px 15px; /* Λιγότερη εσωτερική απόσταση στις μικρές οθόνες */
+        font-size: 14px; /* Μικρότερη γραμματοσειρά στις μικρές οθόνες */
+    }
+}
