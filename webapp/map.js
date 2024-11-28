@@ -124,65 +124,74 @@ button.onclick = function() {
     isLight = !isLight;
 };
 
-// Σημείο εκκίνησης για την αλλαγή θεμάτων (θερμοκρασία και άνεμος)
-var isTemperatureVisible = false;
-var isWindVisible = false;
+// Αρχικό heatmap layer (θα φορτωθεί αργότερα)
+var heatLayer;
 
-function getUserLocation() {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            var lat = position.coords.latitude;
-            var lon = position.coords.longitude;
-            fetchWeatherData(lat, lon);
-        }, function(error) {
-            console.error("Σφάλμα κατά την απόκτηση της θέσης του χρήστη: " + error.message);
-        });
-    } else {
-        console.log("Η γεωτοποθέτηση δεν υποστηρίζεται από τον browser.");
+// Συνάρτηση για να φορτώσουμε τις περιοχές από το JSON αρχείο
+async function loadAreasFromJSON() {
+    try {
+        let response = await fetch('locations.json'); // Φόρτωση του αρχείου JSON
+        let areas = await response.json(); // Ανάγνωση του JSON δεδομένου
+        console.log(areas); // Εμφάνιση των περιοχών στον κονσόλα
+        
+        // Φόρτωση των δεδομένων του καιρού για τις περιοχές και δημιουργία heatmap
+        await loadTemperatureData(areas); // Περνάμε τις περιοχές στο loadTemperatureData
+    } catch (error) {
+        console.log("Σφάλμα κατά τη φόρτωση των περιοχών:", error);
     }
 }
 
-function fetchWeatherData(lat, lon) {
-    var apiKey =  "f334ce4f82114807a7d72742242811";
-    var url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${lat},${lon}&lang=el`;
+// Συνάρτηση για να φορτώσουμε τα δεδομένα από την API του καιρού για τις περιοχές
+async function loadTemperatureData(areas) {
+    var heatData = [];
 
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            var temperature = data.current.temp_c;
-            var windSpeed = data.current.wind_kph;
-            var windDirection = data.current.wind_dir;
-            var cityName = data.location.name;
+    // Κλείσιμο των αιτήσεων ταυτόχρονα για τις περιοχές γύρω από τη Θεσσαλονίκη
+    var requests = areas.map(async function(area) {
+        var apiKey = "f334ce4f82114807a7d72742242811"; // Αντικαταστήστε με το δικό σας API key
+        var url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${area.lat},${area.lon}&lang=el`;
+        
+        try {
+            let response = await fetch(url);
+            let data = await response.json();
+            
+            var temperature = data.current.temp_c; // Θερμοκρασία
+            var lat = data.location.lat;
+            var lon = data.location.lon;
 
-            var tempText = ` ${cityName}${temperature}°C.`;
-            var windText = ` ${windSpeed}${windDirection}.`;
+            // Προσθέτουμε τα δεδομένα στην array για το heatmap
+            heatData.push([lat, lon, temperature]);
+        } catch (error) {
+            console.log(`Σφάλμα κατά την απόκτηση δεδομένων για την περιοχή: ${area.name}`);
+        }
+    });
 
-            var tempButton = document.getElementById('temperature-toggle');
-            var windButton = document.getElementById('wind-toggle');
+    // Περιμένουμε όλες τις αιτήσεις να ολοκληρωθούν
+    await Promise.all(requests);
 
-            tempButton.onclick = function() {
-                if (isTemperatureVisible) {
-                    tempButton.textContent = "Θερμοκρασία";
-                } else {
-                    tempButton.textContent = tempText;
-                }
-                isTemperatureVisible = !isTemperatureVisible;
-            };
-
-            windButton.onclick = function() {
-                if (isWindVisible) {
-                    windButton.textContent = "Άνεμος";
-                } else {
-                    windButton.textContent = windText;
-                }
-                isWindVisible = !isWindVisible;
-            };
-        })
-        .catch(error => {
-            console.error('Σφάλμα κατά την απόκτηση των δεδομένων θερμοκρασίας και ανέμου:', error);
-        });
+    // Δημιουργία του Heatmap Layer με τα δεδομένα θερμοκρασίας
+    if (heatData.length > 0) {
+        heatLayer = L.heatLayer(heatData, {
+            radius: 40,       // Ακτίνα του σημείου στο heatmap
+            blur: 15,         // Θολούρα του heatmap
+            maxZoom: 5,      // Μέγιστο zoom
+            gradient: {       // Χρωματική κλίμακα για θερμοκρασία
+                0.0: "blue",  // Ψυχρές θερμοκρασίες
+                0.5: "yellow",// Μεσαίες θερμοκρασίες
+                1.0: "red"    // Ζεστές θερμοκρασίες
+            }
+        }).addTo(map);
+    }
 }
 
-// Κουμπί για τη λήψη θέσης και εμφάνιση θερμοκρασίας
-document.getElementById('temperature-toggle').onclick = getUserLocation;
-document.getElementById('wind-toggle').onclick = getUserLocation;
+// Φόρτωση των περιοχών και του heatmap
+loadAreasFromJSON();
+
+document.getElementById('heatmap-btn').addEventListener('click', function() {
+    if (heatLayer) {
+        if (map.hasLayer(heatLayer)) {
+            map.removeLayer(heatLayer); // Αφαίρεση heatmap από τον χάρτη
+        } else {
+            map.addLayer(heatLayer); // Προσθήκη heatmap στον χάρτη
+        }
+    }
+});

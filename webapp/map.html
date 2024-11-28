@@ -10,24 +10,26 @@
 <body>
 
     <!-- Χάρτης -->
-    <div id="map"></div>
+    <div id="map" style="height: 600px;"></div> <!-- Προσθήκη ύψους στον χάρτη -->
+    
     <div id="button-container">
         <div id="theme-container">
             <button id="theme-toggle">Αλλαγή Θέματος</button>
         </div>
-        <div id="temperature-container">
-            <button id="temperature-toggle">Δες Θερμοκρασία</button>
-        </div>
-        <button id="wind-toggle" class="weather-button">Δείξε τον Άνεμο</button>
+        <input type="radio" id="heatmap-btn">
+        <label for="age1">Εμφάνιση Θερμοκρασιών</label>
     </div>
     
-    
-    
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script> <!-- Σύνδεση με το Leaflet.js -->
-    <script type="module" src="map.js"></script> <!-- Σύνδεση με το JavaScript αρχείο -->
+    <!-- Συνδέουμε το Leaflet.js και το Leaflet.heat -->
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet.heat@0.2.0/dist/leaflet-heat.js"></script>
+
+    <!-- Σύνδεση με το JavaScript αρχείο -->
+    <script type="module" src="map.js"></script> 
 
 </body>
 </html>
+
 
 
 
