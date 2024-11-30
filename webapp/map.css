@@ -50,34 +50,27 @@ html, body {
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά όταν πατηθεί */
 }
 
-/* Στυλ για το κουμπί θερμοκρασίας */
-#temperature-toggle {
-    padding: 12px 20px;
-    background-color: #007bff;
+#heatmap-btn {
+    background-color: #007bff; /* Μπλε κουμπί */
     color: white;
     border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
+    padding: 10px 20px;
     cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Μετάβαση μόνο στη σκιά και μετακίνηση */
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά για βάθος */
-    width: 200px; /* Σταθερό πλάτος */
-    height: 50px; /* Σταθερό ύψος */
-    overflow: hidden; /* Αποφυγή αλλαγής μεγέθους */
-    white-space: nowrap; /* Αποτροπή αναδίπλωσης του κειμένου */
+    border-radius: 5px;
 }
 
-#temperature-toggle:hover {
-    background-color: #0056b3;
-    transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
-    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4); /* Εντονότερη σκιά */
+#heatmap-btn.active {
+    background-color: #28a745; /* Πράσινο όταν ενεργοποιείται */
 }
 
-#temperature-toggle:active {
-    transform: translateY(0); /* Αφαιρεί το downward movement */
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά όταν πατηθεί */
+#heatmap-btn:hover {
+    background-color: #0056b3; /* Σκούρο μπλε κατά το hover */
 }
+
+#heatmap-btn.active:hover {
+    background-color: #218838; /* Σκούρο πράσινο όταν είναι ενεργό */
+}
+
 
 /* Στυλ για το κουμπί ανεμιστήρα */
 #wind-toggle {
@@ -138,7 +131,7 @@ html, body {
 }
 
 /* Responsive: Στυλ για κινητές συσκευές */
-@media (max-width: 768px) {
+@media (max-width: auto) {
     #theme-toggle, #temperature-toggle, #wind-toggle {
         padding: 10px 15px; /* Λιγότερη εσωτερική απόσταση στις μικρές οθόνες */
         font-size: 14px; /* Μικρότερη γραμματοσειρά στις μικρές οθόνες */
