@@ -1,0 +1,6 @@
+[
+    { "lat": 40.6401, "lon": 22.9444, "windSpeed": 10 },
+    { "lat": 40.6500, "lon": 22.9600, "windSpeed": 12 },
+    { "lat": 40.6700, "lon": 22.9800, "windSpeed": 8 },
+    { "lat": 40.6800, "lon": 22.9500, "windSpeed": 15 }
+]

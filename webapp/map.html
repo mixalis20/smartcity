@@ -25,9 +25,13 @@
             Θερμοκρασία
             <input type="radio" id="temperature-radio" name="map-toggle">
         </label>
+        <label for="wind-radio">Εμφάνιση Wind Heatmap:</label>
+        <input type="checkbox" id="wind-radio" name="wind-radio" />
     </div>
    
-    
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.css">
+<script src="https://unpkg.com/leaflet-heat@0.2.0/dist/leaflet-heat.js"></script>
+
     
     <!-- Συνδέουμε το Leaflet.js και το Leaflet.heat -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>

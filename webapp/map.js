@@ -41,7 +41,7 @@ const icons = {
     parking: createIcon('parking-icon.png'),
     pharmacy: createIcon('pharmacy.png'),
     atm: createIcon('atm.webp'),
-    landmark: createIcon('landmark.png') 
+    landmark: createIcon('landmark.png')
 };
 
 // Συνάρτηση για φόρτωση JSON δεδομένων και δημιουργία markers
@@ -68,7 +68,6 @@ loadMarkers('data.json', icons.wifi);
 loadMarkers('data2.json', icons.pharmacy);
 loadMarkers('data3.json', icons.atm);
 loadMarkers('data4.json', icons.parking);
-loadMarkers('mdjsaon');
 
 // Προσθήκη legend για τα εικονίδια
 const legend = L.control({ position: 'topright' });
@@ -159,14 +158,12 @@ heatmapButton?.addEventListener('click', () => {
     }
 });
 
-
+// Διορθώσεις για τα θέματα Light και Dark
 const lightThemeCheckbox = document.getElementById('light-theme');
 const darkThemeCheckbox = document.getElementById('dark-theme');
 
-
 lightThemeCheckbox.addEventListener('change', () => {
     if (lightThemeCheckbox.checked) {
-        
         document.body.classList.remove('dark-theme'); 
         map.removeLayer(darkLayer); 
         lightLayer.addTo(map); 
@@ -174,18 +171,14 @@ lightThemeCheckbox.addEventListener('change', () => {
     }
 });
 
-
 darkThemeCheckbox.addEventListener('change', () => {
     if (darkThemeCheckbox.checked) {
-        // Ενεργοποιούμε το Dark Theme
-        document.body.classList.add('dark-theme'); // Προσθέτουμε την κλάση dark-theme στο body
-        map.removeLayer(lightLayer); // Αφαιρούμε το lightLayer από τον χάρτη
-        darkLayer.addTo(map); // Προσθέτουμε το darkLayer στον χάρτη
-        lightThemeCheckbox.checked = false; // Απενεργοποιούμε το Light Theme checkbox
+        document.body.classList.add('dark-theme');
+        map.removeLayer(lightLayer); 
+        darkLayer.addTo(map); 
+        lightThemeCheckbox.checked = false;
     }
 });
-
-
 
 // Συνάρτηση για φόρτωση δεδομένων από το JSON αρχείο και προσθήκη markers
 async function loadPointsOfInterest() {
@@ -212,13 +205,47 @@ async function loadPointsOfInterest() {
 // Φόρτωση των σημείων ενδιαφέροντος από το JSON
 loadPointsOfInterest();
 
-// Προσθέτουμε στυλ στο popup μέσω του Leaflet
-marker.on('popupopen', function() {
-    const popupContent = marker.getPopup().getContent();
-    const popupElement = popupContent.querySelector('.leaflet-popup-content');
-    popupElement.style.width = '250px'; // Μικρότερο μέγεθος
-    popupElement.style.fontSize = '14px'; // Μικρότερο μέγεθος γραμματοσειράς
+// Συνάρτηση για φόρτωση δεδομένων ανέμου (από JSON)
+let windLayer;  // Global για να μπορεί να γίνει αναφορά από άλλες συνάρτησεις
+
+async function loadWindData(jsonFile) {
+    try {
+        const response = await fetch(jsonFile);
+        if (!response.ok) throw new Error(`Σφάλμα φόρτωσης από ${jsonFile}`);
+
+        const windData = await response.json();
+        const windHeatmapData = windData.map(point => {
+            return [point.lat, point.lon, point.wind_speed]; // Δεδομένα για τον άνεμο
+        });
+
+        if (windLayer) {
+            map.removeLayer(windLayer);  // Αφαίρεση του υπάρχοντος Heatmap
+        }
+
+        windLayer = L.heatLayer(windHeatmapData, {
+            radius: 40,
+            blur: 15,
+            maxZoom: 5,
+            gradient: {
+                0.0: "blue",
+                0.5: "yellow",
+                5.0: "red"
+            }
+        }).addTo(map);
+
+    } catch (error) {
+        console.error("Σφάλμα φόρτωσης δεδομένων ανέμου:", error);
+    }
+}
+
+// Κουμπί για ενεργοποίηση/απενεργοποίηση του Wind Heatmap
+const windCheckbox = document.getElementById('wind-checkbox');
+windCheckbox.addEventListener('change', (e) => {
+    if (e.target.checked) {
+        loadWindData('wind-data.json');
+    } else {
+        if (map.hasLayer(windLayer)) {
+            map.removeLayer(windLayer);
+        }
+    }
 });
-
-
-
