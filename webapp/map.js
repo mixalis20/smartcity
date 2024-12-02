@@ -67,6 +67,7 @@ loadMarkers('data.json', icons.wifi);
 loadMarkers('data2.json', icons.pharmacy);
 loadMarkers('data3.json', icons.atm);
 loadMarkers('data4.json', icons.parking);
+loadMarkers('mdjsaon');
 
 // Προσθήκη legend για τα εικονίδια
 const legend = L.control({ position: 'topright' });
@@ -157,22 +158,22 @@ heatmapButton?.addEventListener('click', () => {
     }
 });
 
-// Αλλαγή θέματος με Checkboxes
+
 const lightThemeCheckbox = document.getElementById('light-theme');
 const darkThemeCheckbox = document.getElementById('dark-theme');
 
-// Όταν αλλάζει το Light Theme checkbox
+
 lightThemeCheckbox.addEventListener('change', () => {
     if (lightThemeCheckbox.checked) {
-        // Ενεργοποιούμε το Light Theme
-        document.body.classList.remove('dark-theme'); // Αφαιρούμε το dark-theme αν είναι ενεργό
-        map.removeLayer(darkLayer); // Αφαιρούμε το darkLayer από τον χάρτη
-        lightLayer.addTo(map); // Προσθέτουμε το lightLayer στον χάρτη
-        darkThemeCheckbox.checked = false; // Απενεργοποιούμε το Dark Theme checkbox
+        
+        document.body.classList.remove('dark-theme'); 
+        map.removeLayer(darkLayer); 
+        lightLayer.addTo(map); 
+        darkThemeCheckbox.checked = false; 
     }
 });
 
-// Όταν αλλάζει το Dark Theme checkbox
+
 darkThemeCheckbox.addEventListener('change', () => {
     if (darkThemeCheckbox.checked) {
         // Ενεργοποιούμε το Dark Theme
@@ -183,3 +184,27 @@ darkThemeCheckbox.addEventListener('change', () => {
     }
 });
 
+// Συνάρτηση για φόρτωση δεδομένων από το JSON αρχείο και προσθήκη markers
+async function loadPointsOfInterest() {
+    try {
+        const response = await fetch('md.json');  // Φόρτωση του JSON αρχείου
+        if (!response.ok) throw new Error('Σφάλμα φόρτωσης σημείων ενδιαφέροντος');
+
+        const points = await response.json();  // Μετατροπή του JSON σε αντικείμενα
+
+        points.forEach(point => {
+            const marker = L.marker([point.lat, point.lon]).addTo(map);
+            marker.bindPopup(`
+                <h3>${point.title}</h3>
+                <img src="${point.image}" alt="${point.title}" style="width: 100px; height: auto;"/>
+                <p>${point.description}</p>
+                <a href="gallery.html" target="_blank" style="color: blue; text-decoration: underline;">Δες στην γκαλερί</a>
+            `);
+        });
+    } catch (error) {
+        console.error("Σφάλμα φόρτωσης των σημείων ενδιαφέροντος:", error);
+    }
+}
+
+// Φόρτωση των σημείων ενδιαφέροντος από το JSON
+loadPointsOfInterest();
