@@ -31,7 +31,7 @@ body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
   text-align: center;
   /* padding: 20px; */
-  height: 350px;
+  height: 400px;
   width: 400px;
   margin: 5px;
   float: left;
@@ -48,11 +48,12 @@ body {
 
 /* Στυλ εικόνας */
 .img-sights img {
-  width: 150px;
-  height: 200px;
+  width: 95%;
+  height: 40vh;
   border-radius: 8px;
   margin-bottom: 15px;
   transition: transform 0.3s ease-in-out;
+  object-fit: cover;
 }
 
 /* Στυλ κειμένου */
