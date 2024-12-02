@@ -210,10 +210,13 @@ let windLayer;  // Global για να μπορεί να γίνει αναφορ�
 
 async function loadWindData(jsonFile) {
     try {
+        console.log("Φόρτωση δεδομένων ανέμου...");
         const response = await fetch(jsonFile);
         if (!response.ok) throw new Error(`Σφάλμα φόρτωσης από ${jsonFile}`);
 
         const windData = await response.json();
+        console.log("Δεδομένα ανέμου:", windData);  // Ελέγξτε τα δεδομένα
+        
         const windHeatmapData = windData.map(point => {
             return [point.lat, point.lon, point.wind_speed]; // Δεδομένα για τον άνεμο
         });
@@ -227,9 +230,9 @@ async function loadWindData(jsonFile) {
             blur: 15,
             maxZoom: 5,
             gradient: {
-                0.0: "blue",
-                0.5: "yellow",
-                5.0: "red"
+                0.0: "green",
+                0.5: "purple",
+                5.0: "yellow"
             }
         }).addTo(map);
 
@@ -238,11 +241,12 @@ async function loadWindData(jsonFile) {
     }
 }
 
+
 // Κουμπί για ενεργοποίηση/απενεργοποίηση του Wind Heatmap
-const windCheckbox = document.getElementById('wind-checkbox');
+const windCheckbox = document.getElementById('wind-radio');
 windCheckbox.addEventListener('change', (e) => {
     if (e.target.checked) {
-        loadWindData('wind-data.json');
+        loadWindData('wind.json');
     } else {
         if (map.hasLayer(windLayer)) {
             map.removeLayer(windLayer);
