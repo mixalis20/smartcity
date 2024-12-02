@@ -135,7 +135,7 @@ async function fetchTemperatureData(areas) {
 }
 
 // Κουμπί για ενεργοποίηση/απενεργοποίηση του Heatmap
-const heatmapButton = document.getElementById('heatmap-radio');
+const heatmapButton = document.getElementById('temperature-radio');
 
 heatmapButton?.addEventListener('click', () => {
     if (!heatLayer) {
@@ -156,3 +156,30 @@ heatmapButton?.addEventListener('click', () => {
         }
     }
 });
+
+// Αλλαγή θέματος με Checkboxes
+const lightThemeCheckbox = document.getElementById('light-theme');
+const darkThemeCheckbox = document.getElementById('dark-theme');
+
+// Όταν αλλάζει το Light Theme checkbox
+lightThemeCheckbox.addEventListener('change', () => {
+    if (lightThemeCheckbox.checked) {
+        // Ενεργοποιούμε το Light Theme
+        document.body.classList.remove('dark-theme'); // Αφαιρούμε το dark-theme αν είναι ενεργό
+        map.removeLayer(darkLayer); // Αφαιρούμε το darkLayer από τον χάρτη
+        lightLayer.addTo(map); // Προσθέτουμε το lightLayer στον χάρτη
+        darkThemeCheckbox.checked = false; // Απενεργοποιούμε το Dark Theme checkbox
+    }
+});
+
+// Όταν αλλάζει το Dark Theme checkbox
+darkThemeCheckbox.addEventListener('change', () => {
+    if (darkThemeCheckbox.checked) {
+        // Ενεργοποιούμε το Dark Theme
+        document.body.classList.add('dark-theme'); // Προσθέτουμε την κλάση dark-theme στο body
+        map.removeLayer(lightLayer); // Αφαιρούμε το lightLayer από τον χάρτη
+        darkLayer.addTo(map); // Προσθέτουμε το darkLayer στον χάρτη
+        lightThemeCheckbox.checked = false; // Απενεργοποιούμε το Light Theme checkbox
+    }
+});
+

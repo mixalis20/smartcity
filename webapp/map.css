@@ -1,12 +1,25 @@
+/* Αφαίρεση περιθωρίων και καθορισμός ύψους για το σώμα */
 html, body {
-    height: auto;
+    height: 100%; /* Ρυθμίζει το ύψος του σώματος για πλήρη κάλυψη της σελίδας */
     margin: 0;  /* Αφαιρεί τα περιθώρια */
+}
+
+/* Στυλ για το Light Theme */
+body {
+    background-color: #fff;
+    color: #000;
+}
+
+/* Στυλ για το Dark Theme */
+body.dark-theme {
+    background-color: #333;
+    color: #fff;
 }
 
 /* Στυλ για το χάρτη */
 #map {
-    height: auto; /* Ύψος: 100% του ύψους του παραθύρου */
-    width: auto;
+    height: 600px; /* Σταθερό ύψος για τον χάρτη */
+    width: 100%;  /* Πλάτος 100% του γονικού container */
 }
 
 /* Στυλ για το container των κουμπιών */
@@ -15,16 +28,15 @@ html, body {
     top: 70px;  /* Ξεκινάει από την κορυφή */
     right: 10px;
     z-index: 999;
-    display: flex; /* Χρησιμοποιούμε flexbox για να τα τοποθετήσουμε κάθετα */
-    flex-direction: column; /* Τοποθετούμε τα κουμπιά το ένα κάτω από το άλλο */
+    display: flex;
+    flex-direction: column;
     gap: 10px; /* Απόσταση μεταξύ των κουμπιών */
-    margin-top: 90px;
 }
 
-/* Στυλ για το κουμπί αλλαγής θέματος */
-#theme-toggle {
+/* Στυλ για τα κουμπιά */
+.button, #theme-toggle, #wind-toggle, #heatmap-btn, .weather-button {
     padding: 12px 20px;
-    background-color: #007bff; /* Μπλε χρώμα για το κουμπί */
+    background-color: #007bff; /* Μπλε χρώμα για τα κουμπιά */
     color: white;
     border: none;
     border-radius: 25px; /* Στρογγυλεμένες γωνίες */
@@ -39,101 +51,47 @@ html, body {
     white-space: nowrap; /* Αποτροπή αναδίπλωσης του κειμένου */
 }
 
-#theme-toggle:hover {
+/* Hover και active καταστάσεις */
+.button:hover, #theme-toggle:hover, #wind-toggle:hover, #heatmap-btn:hover, .weather-button:hover {
     background-color: #0056b3; /* Σκούρο μπλε όταν το κουμπί hover */
     transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
     box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4); /* Εντονότερη σκιά */
 }
 
-#theme-toggle:active {
+.button:active, #theme-toggle:active, #wind-toggle:active, #heatmap-btn:active, .weather-button:active {
     transform: translateY(0); /* Αφαιρεί το downward movement */
     box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά όταν πατηθεί */
 }
 
-#heatmap-btn {
-    background-color: #007bff; /* Μπλε κουμπί */
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
+/* Στυλ για το container με τα checkboxes και radio button */
+#theme-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(255, 255, 255, 0.7); /* Απαλό φόντο για να ξεχωρίζουν τα κουμπιά */
+    padding: 10px;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column; /* Τοποθέτηση των στοιχείων κάθετα */
+    gap: 15px; /* Απόσταση μεταξύ των στοιχείων */
+    z-index: 1000;
+    margin-top: 115px;
 }
 
-#heatmap-btn.active {
-    background-color: #28a745; /* Πράσινο όταν ενεργοποιείται */
+/* Στυλ για τα labels μέσα στο theme-container */
+#theme-container label {
+    display: flex;
+    justify-content: space-between; /* Τοποθετεί το κείμενο αριστερά και το checkbox δεξιά */
+    align-items: center;
 }
 
-#heatmap-btn:hover {
-    background-color: #0056b3; /* Σκούρο μπλε κατά το hover */
+/* Στυλ για το legend ώστε να παραμένει σταθερό */
+.leaflet-control-layers {
+    color: #000; /* Κείμενο του legend σε μαύρο χρώμα */
 }
 
-#heatmap-btn.active:hover {
-    background-color: #218838; /* Σκούρο πράσινο όταν είναι ενεργό */
+body.dark-theme .leaflet-control-layers {
+    color: #fff; /* Κείμενο του legend σε λευκό χρώμα όταν είναι το Dark Theme */
 }
 
 
-/* Στυλ για το κουμπί ανεμιστήρα */
-#wind-toggle {
-    padding: 12px 20px;
-    background-color: #007bff; /* Μπλε χρώμα για το κουμπί */
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Μετάβαση μόνο στη σκιά και μετακίνηση */
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά για βάθος */
-    width: 200px; /* Σταθερό πλάτος */
-    height: 50px; /* Σταθερό ύψος */
-    overflow: hidden; /* Αποφυγή αλλαγής μεγέθους */
-    white-space: nowrap; /* Αποτροπή αναδίπλωσης του κειμένου */
-}
-
-#wind-toggle:hover {
-    background-color: #0056b3; /* Σκούρο μπλε όταν το κουμπί hover */
-    transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
-    box-shadow: 0 6px 12px rgba(0, 123, 255, 0.4); /* Εντονότερη σκιά */
-}
-
-#wind-toggle:active {
-    transform: translateY(0); /* Αφαιρεί το downward movement */
-    box-shadow: 0 4px 8px rgba(0, 123, 255, 0.3); /* Σκιά όταν πατηθεί */
-}
-
-/* Στυλ για το κουμπί και τα άλλα κουμπιά */
-.weather-button {
-    padding: 12px 20px;
-    background-color: #28a745; /* Πράσινο χρώμα για το κουμπί */
-    color: white;
-    border: none;
-    border-radius: 25px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Μετάβαση μόνο στη σκιά και μετακίνηση */
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά για βάθος */
-    width: 200px; /* Σταθερό πλάτος */
-    height: 50px; /* Σταθερό ύψος */
-    overflow: hidden; /* Αποφυγή αλλαγής μεγέθους */
-    white-space: nowrap; /* Αποτροπή αναδίπλωσης του κειμένου */
-}
-
-.weather-button:hover {
-    background-color: #218838; /* Σκούρο πράσινο όταν το κουμπί hover */
-    transform: translateY(-2px); /* Μετακίνηση προς τα πάνω για εφέ hover */
-    box-shadow: 0 6px 12px rgba(40, 167, 69, 0.4); /* Εντονότερη σκιά */
-}
-
-.weather-button:active {
-    transform: translateY(0); /* Αφαιρεί το downward movement */
-    box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3); /* Σκιά όταν πατηθεί */
-}
-
-/* Responsive: Στυλ για κινητές συσκευές */
-@media (max-width: auto) {
-    #theme-toggle, #temperature-toggle, #wind-toggle {
-        padding: 10px 15px; /* Λιγότερη εσωτερική απόσταση στις μικρές οθόνες */
-        font-size: 14px; /* Μικρότερη γραμματοσειρά στις μικρές οθόνες */
-    }
-}

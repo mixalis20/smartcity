@@ -12,18 +12,21 @@
     <!-- Χάρτης -->
     <div id="map" style="height: 600px;"></div> <!-- Προσθήκη ύψους στον χάρτη -->
     
-    <div id="button-container">
-        <div id="theme-container">
-            <button id="theme-toggle">Αλλαγή Θέματος</button>
-        </div>
-        <div>
-            <label>
-                <input type="radio" id="heatmap-radio" name="map-toggle">
-                Ενεργοποίηση Heatmap
-            </label>
-        </div>
-        
+    <div id="theme-container">
+        <label>
+            Light Theme
+            <input type="checkbox" id="light-theme" checked>
+        </label>
+        <label>
+            Dark Theme
+            <input type="checkbox" id="dark-theme">
+        </label>
+        <label>
+            Θερμοκρασία
+            <input type="radio" id="temperature-radio" name="map-toggle">
+        </label>
     </div>
+    
     
     <!-- Συνδέουμε το Leaflet.js και το Leaflet.heat -->
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
