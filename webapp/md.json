@@ -5,6 +5,7 @@
         "image":"images/img1.jpg.jfif",
         "lat": 40.626365,
         "lon": 22.948752,
+        "type":"landmark",
         "id" : 1
     },
     {
@@ -13,6 +14,7 @@
         "image":"images/img2.jpg.jfif",
         "lat": 40.624028,
         "lon": 22.950161,
+        "type":"landmark",
         "id" : 2
     },
     {
@@ -21,6 +23,7 @@
         "image":"images/img3.jpg.jfif",
         "lat": 40.638229,
         "lon": 22.959481,
+        "type":"landmark",
         "id" : 3
     },
     {
@@ -29,6 +32,7 @@
         "image":"images/img4.jpg.jfif",
         "lat": 40.632139,
         "lon": 22.951866,
+        "type":"landmark",
         "id" : 4
     },
     {
@@ -37,6 +41,7 @@
         "image":"images/img5.jpg.jfif",
         "lat": 40.633203,
         "lon": 22.953148,
+        "type":"landmark",
         "id" : 5
     }
 ]

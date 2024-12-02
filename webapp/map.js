@@ -40,7 +40,8 @@ const icons = {
     wifi: createIcon('wifi-icon.webp'),
     parking: createIcon('parking-icon.png'),
     pharmacy: createIcon('pharmacy.png'),
-    atm: createIcon('atm.webp')
+    atm: createIcon('atm.webp'),
+    landmark: createIcon('landmark.png') 
 };
 
 // Συνάρτηση για φόρτωση JSON δεδομένων και δημιουργία markers
@@ -184,6 +185,8 @@ darkThemeCheckbox.addEventListener('change', () => {
     }
 });
 
+
+
 // Συνάρτηση για φόρτωση δεδομένων από το JSON αρχείο και προσθήκη markers
 async function loadPointsOfInterest() {
     try {
@@ -208,3 +211,14 @@ async function loadPointsOfInterest() {
 
 // Φόρτωση των σημείων ενδιαφέροντος από το JSON
 loadPointsOfInterest();
+
+// Προσθέτουμε στυλ στο popup μέσω του Leaflet
+marker.on('popupopen', function() {
+    const popupContent = marker.getPopup().getContent();
+    const popupElement = popupContent.querySelector('.leaflet-popup-content');
+    popupElement.style.width = '250px'; // Μικρότερο μέγεθος
+    popupElement.style.fontSize = '14px'; // Μικρότερο μέγεθος γραμματοσειράς
+});
+
+
+

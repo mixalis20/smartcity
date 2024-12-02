@@ -87,11 +87,29 @@ body.dark-theme {
 
 /* Στυλ για το legend ώστε να παραμένει σταθερό */
 .leaflet-control-layers {
-    color: #000; /* Κείμενο του legend σε μαύρο χρώμα */
+    color: #000 !important; /* Κείμενο του legend σε μαύρο χρώμα */
 }
 
 body.dark-theme .leaflet-control-layers {
     color: #fff; /* Κείμενο του legend σε λευκό χρώμα όταν είναι το Dark Theme */
+}
+/* Προσαρμογή μεγέθους του popup */
+.leaflet-popup-content {
+    width: 250px; /* Μπορείς να το αλλάξεις όπως θέλεις */
+    height: auto;
+    font-size: 14px; /* Μπορείς να τροποποιήσεις το μέγεθος της γραμματοσειράς */
+}
+
+/* Προσαρμογή του κουμπιού και του κειμένου μέσα στο popup */
+.leaflet-popup-content a {
+    font-size: 12px; /* Μειώνει το μέγεθος του συνδέσμου */
+    color: blue;
+    text-decoration: underline;
+}
+
+/* Μείωση του μεγέθους του κοντέινερ του popup */
+.leaflet-popup {
+    max-width: 300px; /* Μπορείς να το μικρύνεις ή να το αυξήσεις ανάλογα με τις ανάγκες σου */
 }
 
 
