@@ -205,51 +205,57 @@ async function loadPointsOfInterest() {
 // Φόρτωση των σημείων ενδιαφέροντος από το JSON
 loadPointsOfInterest();
 
-// Συνάρτηση για φόρτωση δεδομένων ανέμου (από JSON)
-let windLayer;  // Global για να μπορεί να γίνει αναφορά από άλλες συνάρτησεις
 
-async function loadWindData(jsonFile) {
-    try {
-        console.log("Φόρτωση δεδομένων ανέμου...");
-        const response = await fetch(jsonFile);
-        if (!response.ok) throw new Error(`Σφάλμα φόρτωσης από ${jsonFile}`);
+// Μεταβλητές για τα δεδομένα του ανέμου και για το layer του ανέμου
+let windData = [];
+let windMarkers = [];  // Μεταβλητή για να αποθηκεύουμε τα markers
 
-        const windData = await response.json();
-        console.log("Δεδομένα ανέμου:", windData);  // Ελέγξτε τα δεδομένα
-        
-        const windHeatmapData = windData.map(point => {
-            return [point.lat, point.lon, point.wind_speed]; // Δεδομένα για τον άνεμο
-        });
+// Δημιουργία περισσότερων δεδομένων για πυκνότερη κάλυψη
+function generateDenseWindData() {
+  let denseData = [];
+  
+  // Δημιουργία πιο πυκνών σημείων γύρω από τη Θεσσαλονίκη
+  for (let i = 0; i < 100; i++) {
+    let latOffset = (Math.random() - 0.5) * 0.05; // Δημιουργεί διαφορά 0.05 στον γεωγραφικό πλάτος
+    let lonOffset = (Math.random() - 0.5) * 0.05; // Δημιουργεί διαφορά 0.05 στον γεωγραφικό μήκος
 
-        if (windLayer) {
-            map.removeLayer(windLayer);  // Αφαίρεση του υπάρχοντος Heatmap
-        }
-
-        windLayer = L.heatLayer(windHeatmapData, {
-            radius: 40,
-            blur: 15,
-            maxZoom: 5,
-            gradient: {
-                0.0: "green",
-                0.5: "purple",
-                5.0: "yellow"
-            }
-        }).addTo(map);
-
-    } catch (error) {
-        console.error("Σφάλμα φόρτωσης δεδομένων ανέμου:", error);
-    }
+    denseData.push({
+      lat: 40.6401 + latOffset,
+      lon: 22.9444 + lonOffset,
+      windSpeed: Math.random() * 10, // Τυχαία ταχύτητα ανέμου από 0 έως 10 m/s
+      windDeg: Math.random() * 360, // Τυχαία κατεύθυνση ανέμου από 0 έως 360 μοίρες
+    });
+  }
+  return denseData;
 }
 
+// Φόρτωση των δεδομένων
+function loadWindData() {
+  // Αντί για δεδομένα JSON, θα χρησιμοποιήσουμε τεχνητά πυκνότερα δεδομένα
+  windData = generateDenseWindData();
 
-// Κουμπί για ενεργοποίηση/απενεργοποίηση του Wind Heatmap
-const windCheckbox = document.getElementById('wind-radio');
-windCheckbox.addEventListener('change', (e) => {
-    if (e.target.checked) {
-        loadWindData('wind.json');
-    } else {
-        if (map.hasLayer(windLayer)) {
-            map.removeLayer(windLayer);
-        }
-    }
+  // Αφαίρεση προηγούμενων markers
+  windMarkers.forEach(marker => marker.remove());
+  windMarkers = [];  // Επαναφορά της λίστας με τα markers
+
+  // Προσθήκη των νέων δεδομένων του ανέμου στον χάρτη
+  windData.forEach(function(wind) {
+    // Δημιουργία του εικονιδίου του ανέμου (βέλος)
+    const windDirection = wind.windDeg; // Κατεύθυνση του ανέμου
+    const windIcon = L.divIcon({
+      className: 'wind-arrow',
+      html: `<i style="transform: rotate(${windDirection}deg); font-size: 24px;">&#8595;</i>`,  // Ένα απλό βέλος
+      iconSize: [20, 20],
+      iconAnchor: [10, 10]
+    });
+
+    // Τοποθέτηση των βελών στον χάρτη
+    const marker = L.marker([wind.lat, wind.lon], { icon: windIcon }).addTo(map);
+    windMarkers.push(marker);  // Αποθήκευση του marker στη λίστα
+  });
+}
+
+// Όταν πατηθεί το κουμπί, να εμφανιστεί ο άνεμος
+document.getElementById('wind-radio').addEventListener('click', function() {
+  loadWindData();  // Φορτώνει και εμφανίζει τα δεδομένα του ανέμου
 });

@@ -1,13 +1,8 @@
 [
-    {
-        "lat": 40.6401,
-        "lon": 22.9444,
-        "wind_speed": 5.2
-    },
-    {
-        "lat": 40.6405,
-        "lon": 22.9448,
-        "wind_speed": 3.4
-    }
-]
+    { "lat": 40.6401, "lon": 22.9444, "windSpeed": 5, "windDeg": 90 },
+    { "lat": 40.6451, "lon": 22.9494, "windSpeed": 6, "windDeg": 180 },
+    { "lat": 40.6501, "lon": 22.9544, "windSpeed": 7, "windDeg": 270 },
+    { "lat": 40.6551, "lon": 22.9594, "windSpeed": 8, "windDeg": 45 },
+    { "lat": 40.6601, "lon": 22.9644, "windSpeed": 4, "windDeg": 135 }
+  ]
 
