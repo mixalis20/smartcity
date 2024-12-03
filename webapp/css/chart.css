@@ -1,66 +1,54 @@
 /* Ρυθμίσεις για το body */
-body {
-    background-color: #f0f0f0; /* Ελαφρύ γκρι φόντο για όλη τη σελίδα */
-    font-family: Arial, sans-serif; /* Εμφάνιση γραμματοσειράς */
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap; /* Διασπά τα γραφήματα για να είναι δίπλα-δίπλα ή κάτω */
-    padding: 20px;
-    gap: 20px; /* Κενό μεταξύ των γραφημάτων */
-    height: auto;
-}
-
-/* Container για τα γραφήματα */
-.chart-container {
-    display: inline-block;
-    width: 48%; /* Μειώνουμε το πλάτος των γραφημάτων για να είναι δίπλα δίπλα */
-    padding: 10px;
-    margin: 10px 0;
-    background-color: #ffffff; /* Λευκό φόντο πίσω από το κάθε γράφημα */
-    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Προσθήκη σκιάς γύρω από το γράφημα */
-}
-
-/* Γενικές ρυθμίσεις για τα canvas */
-canvas {
-    display: block;
-    width: 100% !important;
-    height: 100% !important;
-    border-radius: 8px; /* Στρογγυλεμένες γωνίες στο γράφημα */
-    background-color: #f5f5f5; /* Ανοιχτό γκρι φόντο πίσω από το γράφημα */
-}
-
-/* Ρυθμίσεις για την εμφάνιση της legend και των τίτλων */
-.chart-container h3 {
-    text-align: center;
-    font-size: 18px;
-    font-weight: bold;
-    color: #333;
-}
-
-/* Κάποια περιθώρια για τα γραφήματα */
-.chart-container canvas {
-    margin-top: 10px;
-    margin-bottom:10px;
-}
-
-/* Προσθήκη του layout στο container */
-.chart-container {
-    padding: 5px;
-    background-color: #fafafa;
-    border-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
 /* Στυλ για την επικεφαλίδα */
 .page-title {
-    text-align: center; /* Κεντράρει την επικεφαλίδα */
-    font-size: 32px; /* Μέγεθος γραμματοσειράς */
-    font-weight: bold; /* Βάρος γραμματοσειράς */
-    color: #333; /* Χρώμα γραμματοσειράς */
-    margin-bottom: 40px; /* Κενό από κάτω */
-    font-family: 'Arial', sans-serif; /* Ορισμός γραμματοσειράς */
-    text-transform: uppercase; /* Κεφαλαία γράμματα */
-    letter-spacing: 2px; /* Απόσταση μεταξύ των γραμμάτων */
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 40px;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
+
+/* Στυλ για τα γραφήματα */
+.chart-container {
+    position: relative;
+    height: 400px;
+    width: 45%;
+    margin: 20px;
+    background-color: #f5f5f5; /* Γκρι φόντο για κάθε γράφημα */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Σκιά γύρω από το γράφημα */
+    padding: 5px;
+    display: inline-block;
+}
+
+/* Στυλ για τα headers των γραφημάτων */
+.chart-container h3 {
+    text-align: center;
+    font-size: 24px;
+    color: #444;
+}
+
+/* Στυλ για το σώμα της σελίδας */
+body {
+    background-color: #e5e5e5; /* Γενικό υπόβαθρο */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+/* Media Queries για κινητά και μικρές οθόνες */
+@media (max-width: 768px) {
+    .chart-container {
+        width: 90%; /* Κάνει τα γραφήματα μεγαλύτερα σε μικρές οθόνες */
+        margin: 10px auto;
+    }
+
+    .page-title {
+        font-size: 28px;
+    }
+}
+
 

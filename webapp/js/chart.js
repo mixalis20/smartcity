@@ -1,119 +1,133 @@
-fetch('/webapp/json/chart.json')  // Διαδρομή προς το chart.json
+// Συνάρτηση για την ανάγνωση του JSON και την δημιουργία των γραφημάτων
+fetch('/webapp/json/chart.json')
     .then(response => response.json())
     .then(data => {
-        const windData = data.wind;
-        const temperatureData = data.temperature;
-        const humidityData = data.humidity;
-        const co2Data = data.co2;
+        const airData = {
+            labels: data.dates,
+            datasets: [{
+                label: 'Αέρας',
+                data: data.air,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+            }]
+        };
 
-        // Γράφημα Ανέμου
-        const windCtx = document.getElementById('windChart').getContext('2d');
-        new Chart(windCtx, {
-            type: 'line',
-            data: {
-                labels: windData.labels,
-                datasets: [{
-                    label: 'Ταχύτητα Ανέμου (km/h)',
-                    data: windData.data,
-                    fill: false,
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Ταχύτητα (km/h)'
-                        }
+        const temperatureData = {
+            labels: data.dates,
+            datasets: [{
+                label: 'Θερμοκρασία (°C)',
+                data: data.temperature,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+            }]
+        };
+
+        const humidityData = {
+            labels: data.dates,
+            datasets: [{
+                label: 'Υγρασία (%)',
+                data: data.humidity,
+                borderColor: 'rgba(153, 102, 255, 1)',
+                backgroundColor: 'rgba(153, 102, 255, 0.2)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+            }]
+        };
+
+        const co2Data = {
+            labels: data.dates,
+            datasets: [{
+                label: 'Διοξείδιο του Άνθρακα (ppm)',
+                data: data.co2,
+                borderColor: 'rgba(255, 159, 64, 1)',
+                backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                fill: true,
+                tension: 0.4,
+                borderWidth: 2,
+            }]
+        };
+
+        // Κοινές ρυθμίσεις για όλα τα γραφήματα
+        const commonOptions = {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                    labels: {
+                        font: {
+                            size: 14
+                        },
+                        color: '#333'
                     }
-                }
-            }
-        });
-
-        // Γράφημα Θερμοκρασίας
-        const tempCtx = document.getElementById('temperatureChart').getContext('2d');
-        new Chart(tempCtx, {
-            type: 'bar',
-            data: {
-                labels: temperatureData.labels,
-                datasets: [{
-                    label: 'Θερμοκρασία (°C)',
-                    data: temperatureData.data,
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
+                },
+                tooltip: {
+                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                    titleColor: '#fff',
+                    bodyColor: '#fff',
+                    borderColor: '#444',
                     borderWidth: 1
-                }]
+                }
             },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Θερμοκρασία (°C)'
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Ημέρα',
+                        font: {
+                            size: 16
                         }
+                    },
+                    ticks: {
+                        color: '#333',
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Τιμές',
+                        font: {
+                            size: 16
+                        }
+                    },
+                    ticks: {
+                        color: '#333',
                     }
                 }
             }
+        };
+
+        // Δημιουργία των γραφημάτων με τα δεδομένα από το JSON
+        const airChart = new Chart(document.getElementById('airChart'), {
+            type: 'line',
+            data: airData,
+            options: commonOptions
         });
 
-        // Γράφημα Υγρασίας
-        const humidityCtx = document.getElementById('humidityChart').getContext('2d');
-        new Chart(humidityCtx, {
+        const temperatureChart = new Chart(document.getElementById('temperatureChart'), {
             type: 'line',
-            data: {
-                labels: humidityData.labels,
-                datasets: [{
-                    label: 'Υγρασία (%)',
-                    data: humidityData.data,
-                    fill: false,
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Υγρασία (%)'
-                        }
-                    }
-                }
-            }
+            data: temperatureData,
+            options: commonOptions
         });
 
-        // Γράφημα Διοξειδίου του Άνθρακα (CO₂)
-        const co2Ctx = document.getElementById('co2Chart').getContext('2d');
-        new Chart(co2Ctx, {
+        const humidityChart = new Chart(document.getElementById('humidityChart'), {
             type: 'line',
-            data: {
-                labels: co2Data.labels,
-                datasets: [{
-                    label: 'Διοξείδιο του Άνθρακα (ppm)',
-                    data: co2Data.data,
-                    fill: false,
-                    borderColor: 'rgba(153, 102, 255, 1)',
-                    tension: 0.1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'CO₂ (ppm)'
-                        }
-                    }
-                }
-            }
+            data: humidityData,
+            options: commonOptions
+        });
+
+        const co2Chart = new Chart(document.getElementById('co2Chart'), {
+            type: 'line',
+            data: co2Data,
+            options: commonOptions
         });
     })
     .catch(error => {
-        console.error('Σφάλμα κατά τη φόρτωση των δεδομένων:', error);
+        console.error("Σφάλμα κατά την φόρτωση του JSON:", error);
     });

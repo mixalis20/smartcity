@@ -3,36 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Αέρας, Θερμοκρασία, Υγρασία και Διοξείδιο του Άνθρακα στη Θεσσαλονίκη</title>
+    <title>Ενδείξεις Θεσσαλονίκη</title>
     <link rel="stylesheet" href="/webapp/css/chart.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 
+    <!-- Προσθήκη επικεφαλίδας -->
     <h1 class="page-title">Ενδείξεις Θεσσαλονίκη</h1>
 
-    <div class="charts-container">
-        <div class="chart-container">
-            <canvas id="windChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <canvas id="temperatureChart"></canvas>
-        </div>
+    <!-- Γραφήματα -->
+    <div class="chart-container">
+        <h3>Αέρας</h3>
+        <canvas id="airChart"></canvas>
     </div>
-    <div class="charts-container">
-        <div class="chart-container">
-            <canvas id="humidityChart"></canvas>
-        </div>
-        <div class="chart-container">
-            <canvas id="co2Chart"></canvas>
-        </div>
+    <div class="chart-container">
+        <h3>Θερμοκρασία</h3>
+        <canvas id="temperatureChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <h3>Υγρασία</h3>
+        <canvas id="humidityChart"></canvas>
+    </div>
+    <div class="chart-container">
+        <h3>Διοξείδιο στην Ατμόσφαιρα</h3>
+        <canvas id="co2Chart"></canvas>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/webapp/js/chart.js"></script>
 </body>
 </html>
-
-
 
 
 
