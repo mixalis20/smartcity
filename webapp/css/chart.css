@@ -1,43 +1,53 @@
-/* chart.css - Στυλ για το γράφημα */
+/* Ρυθμίσεις για το body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;  /* Χρησιμοποιούμε μια καθαρή γραμματοσειρά */
-    background-color: #f0f4f8;  /* Απαλό γαλάζιο φόντο */
-    margin: 0;
-    padding: 0;
+    background-color: #f0f0f0; /* Ελαφρύ γκρι φόντο για όλη τη σελίδα */
+    font-family: Arial, sans-serif; /* Εμφάνιση γραμματοσειράς */
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 100vh;
-    color: #333;  /* Σκούρο γκρι χρώμα για καλύτερη αναγνωσιμότητα */
-}
-
-h1 {
-    font-size: 28px;
-    margin-bottom: 20px;
-    color: #444;  /* Σκούρο χρώμα για τον τίτλο */
-    font-weight: 600;
-    text-align: center;
-}
-
-.chart-container {
-    position: relative;
-    width: 80%;
-    max-width: 700px;  /* Μεγιστο πλάτος για να μην είναι υπερβολικά μεγάλο */
-    height: auto;
-    background-color: #ffffff;  /* Λευκό φόντο για το κοντέινερ */
-    border-radius: 15px;  /* Λεία γωνία για πιο σύγχρονο στυλ */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* Σκιά γύρω από το γράφημα */
+    flex-wrap: wrap; /* Διασπά τα γραφήματα για να είναι δίπλα-δίπλα ή κάτω */
     padding: 20px;
-    box-sizing: border-box;
+    gap: 20px; /* Κενό μεταξύ των γραφημάτων */
+    height: auto;
 }
 
+/* Container για τα γραφήματα */
+.chart-container {
+    display: inline-block;
+    width: 48%; /* Μειώνουμε το πλάτος των γραφημάτων για να είναι δίπλα δίπλα */
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #ffffff; /* Λευκό φόντο πίσω από το κάθε γράφημα */
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Προσθήκη σκιάς γύρω από το γράφημα */
+}
+
+/* Γενικές ρυθμίσεις για τα canvas */
 canvas {
+    display: block;
     width: 100% !important;
-    height: 400px !important;  /* Καθορισμένο ύψος για να είναι ευανάγνωστο */
-    border-radius: 10px;  /* Λεία γωνία για το ίδιο το γράφημα */
-    border: 1px solid #ddd;  /* Ελαφριά γραμμή γύρω από το γράφημα */
+    height: 100% !important;
+    border-radius: 8px; /* Στρογγυλεμένες γωνίες στο γράφημα */
+    background-color: #f5f5f5; /* Ανοιχτό γκρι φόντο πίσω από το γράφημα */
 }
 
+/* Ρυθμίσεις για την εμφάνιση της legend και των τίτλων */
+.chart-container h3 {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
 
+/* Κάποια περιθώρια για τα γραφήματα */
+.chart-container canvas {
+    margin-top: 10px;
+    margin-bottom:10px;
+}
 
+/* Προσθήκη του layout στο container */
+.chart-container {
+    padding: 5px;
+    background-color: #fafafa;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}

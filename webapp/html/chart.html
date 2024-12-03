@@ -1,21 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="el">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chart</title>
-    <!-- Σύνδεση με το εξωτερικό CSS -->
+    <title>Αέρας, Θερμοκρασία, Υγρασία και Διοξείδιο του Άνθρακα στη Θεσσαλονίκη</title>
     <link rel="stylesheet" href="/webapp/css/chart.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <h1>Atmospheric Gases</h1>
-    
-    <!-- Τοποθέτηση του καμβά με περιορισμένο μέγεθος -->
-    <div class="chart-container">
-        <canvas id="myChart"></canvas>
+    <div class="charts-container">
+        <div class="chart-container">
+            <canvas id="windChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+    </div>
+    <div class="charts-container">
+        <div class="chart-container">
+            <canvas id="humidityChart"></canvas>
+        </div>
+        <div class="chart-container">
+            <canvas id="co2Chart"></canvas>
+        </div>
     </div>
 
     <script src="/webapp/js/chart.js"></script>
 </body>
 </html>
+
+
+
+
+

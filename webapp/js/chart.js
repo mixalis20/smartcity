@@ -1,52 +1,119 @@
-document.addEventListener('DOMContentLoaded', function() {
-    var ctx = document.getElementById('myChart');
-    
-    if (ctx) {
-        ctx = ctx.getContext('2d');
-        var myChart = new Chart(ctx, {
-            type: 'line',  // Επιλέξαμε πίτα για καλύτερη απεικόνιση ποσοστών
+fetch('/webapp/json/chart.json')  // Διαδρομή προς το chart.json
+    .then(response => response.json())
+    .then(data => {
+        const windData = data.wind;
+        const temperatureData = data.temperature;
+        const humidityData = data.humidity;
+        const co2Data = data.co2;
+
+        // Γράφημα Ανέμου
+        const windCtx = document.getElementById('windChart').getContext('2d');
+        new Chart(windCtx, {
+            type: 'line',
             data: {
-                labels: ['Oxygen (O₂)', 'Nitrogen (N₂)', 'Carbon Dioxide (CO₂)', 'Argon (Ar)', 'Water Vapor (H₂O)'],
+                labels: windData.labels,
                 datasets: [{
-                    label: 'Atmospheric Gases',
-                    data: [21.0, 78.09, 0.04, 0.93, 0.03], // Εκτιμώμενα ποσοστά αερίων στην ατμόσφαιρα
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',  // Οξυγόνο
-                        'rgba(54, 162, 235, 0.2)',  // Άζωτο
-                        'rgba(255, 206, 86, 0.2)',  // Διοξείδιο του άνθρακα
-                        'rgba(75, 192, 192, 0.2)',  // Αργό
-                        'rgba(153, 102, 255, 0.2)'  // Υγρασία
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',  // Οξυγόνο
-                        'rgba(54, 162, 235, 1)',  // Άζωτο
-                        'rgba(255, 206, 86, 1)',  // Διοξείδιο του άνθρακα
-                        'rgba(75, 192, 192, 1)',  // Αργό
-                        'rgba(153, 102, 255, 1)'  // Υγρασία
-                    ],
-                    borderWidth: 1
+                    label: 'Ταχύτητα Ανέμου (km/h)',
+                    data: windData.data,
+                    fill: false,
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    tension: 0.1
                 }]
             },
             options: {
-                responsive: true, // Το γράφημα προσαρμόζεται στο μέγεθος της οθόνης
-                plugins: {
-                    legend: {
-                        position: 'top',  // Θέση του πίνακα της υπόδειξης
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(tooltipItem) {
-                                // Εμφανίζει τα δεδομένα με πιο φιλικό τρόπο
-                                return tooltipItem.label + ': ' + tooltipItem.raw.toFixed(2) + '%';
-                            }
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Ταχύτητα (km/h)'
                         }
                     }
                 }
             }
         });
-    } else {
-        console.error("Το στοιχείο canvas με id 'myChart' δεν βρέθηκε.");
-    }
-});
 
+        // Γράφημα Θερμοκρασίας
+        const tempCtx = document.getElementById('temperatureChart').getContext('2d');
+        new Chart(tempCtx, {
+            type: 'bar',
+            data: {
+                labels: temperatureData.labels,
+                datasets: [{
+                    label: 'Θερμοκρασία (°C)',
+                    data: temperatureData.data,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Θερμοκρασία (°C)'
+                        }
+                    }
+                }
+            }
+        });
 
+        // Γράφημα Υγρασίας
+        const humidityCtx = document.getElementById('humidityChart').getContext('2d');
+        new Chart(humidityCtx, {
+            type: 'line',
+            data: {
+                labels: humidityData.labels,
+                datasets: [{
+                    label: 'Υγρασία (%)',
+                    data: humidityData.data,
+                    fill: false,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Υγρασία (%)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Γράφημα Διοξειδίου του Άνθρακα (CO₂)
+        const co2Ctx = document.getElementById('co2Chart').getContext('2d');
+        new Chart(co2Ctx, {
+            type: 'line',
+            data: {
+                labels: co2Data.labels,
+                datasets: [{
+                    label: 'Διοξείδιο του Άνθρακα (ppm)',
+                    data: co2Data.data,
+                    fill: false,
+                    borderColor: 'rgba(153, 102, 255, 1)',
+                    tension: 0.1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'CO₂ (ppm)'
+                        }
+                    }
+                }
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Σφάλμα κατά τη φόρτωση των δεδομένων:', error);
+    });
