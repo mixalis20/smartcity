@@ -9,7 +9,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    background: linear-gradient(to right, #00c6ff, #0072ff);  /* Gradient φόντο */
+    background: linear-gradient(to right, #00c6ff, #0072ff);  
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,10 +23,10 @@ body {
     max-width: 1200px;
     width: 100%;
     padding: 40px;
-    background-color: rgba(255, 255, 255, 0.1);  /* Ελαφρύ ημιδιαφανές φόντο */
+    background-color: rgba(255, 255, 255, 0.1);
     border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    backdrop-filter: blur(10px);  /* Θολωμένο φόντο */
+    backdrop-filter: blur(10px); 
 }
 
 h1 {
@@ -38,13 +38,13 @@ h1 {
 
 .temperature-cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  /* Χρησιμοποιούμε grid layout για responsive design */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));  
     gap: 20px;
     margin-top: 20px;
 }
 
 .temperature-card {
-    background-color: rgba(255, 255, 255, 0.2);  /* Ελαφριά διαφάνεια */
+    background-color: rgba(255, 255, 255, 0.2);  
     border-radius: 10px;
     padding: 20px;
     text-align: center;
@@ -54,7 +54,7 @@ h1 {
 
 .temperature-card:hover {
     transform: scale(1.1);
-    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);  /* Εφέ μεγέθυνσης */
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);  
 }
 
 .temperature-card .day {
@@ -65,9 +65,17 @@ h1 {
 
 .temperature-card .temp {
     font-size: 3rem;
-    color: #ffeb3b;  /* Χρυσαφί χρώμα για την θερμοκρασία */
+    color: #ffeb3b;  
     font-weight: 700;
     margin: 10px 0;
+}
+
+.temperature-card .humidity,
+.temperature-card .co2,
+.temperature-card .air {
+    font-size: 1.2rem;
+    color: #80deea;  
+    font-weight: 500;
 }
 
 .temperature-card .unit {
@@ -76,7 +84,7 @@ h1 {
     text-transform: uppercase;
 }
 
-/* Media Queries για responsive design */
+
 @media (max-width: 768px) {
     .temperature-card {
         padding: 15px;
