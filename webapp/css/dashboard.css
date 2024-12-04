@@ -6,7 +6,6 @@
     border-radius: 5px;
     padding: 20px 70px 20px 20px;
     justify-content: space-evenly;
-    background-image: url(/webapp/images/cloud.webp);
 }
 
 .titlee{
@@ -18,10 +17,10 @@
     width: 95%;
 }
 .dashboardItem{
-    background-color: rgb(59, 118, 186);
+    background-color: rgb(140, 193, 254);
     width: 20vw;
     height: 15vw;
-    border-radius: 20px;
+    border-radius: 75px;
     display: flex;
     flex-direction: column;
     justify-content: center;
