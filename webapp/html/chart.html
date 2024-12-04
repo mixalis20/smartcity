@@ -3,36 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ενδείξεις Θεσσαλονίκη</title>
+    <title>Dashboard Καιρού</title>
     <link rel="stylesheet" href="/webapp/css/chart.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 </head>
 <body>
+    <div class="container">
+        <h1>Dashboard Καιρού</h1>
 
-    <!-- Προσθήκη επικεφαλίδας -->
-    <h1 class="page-title">Ενδείξεις Θεσσαλονίκη</h1>
+        <!-- Κουμπί για άνοιγμα ημερολογίου -->
+        <button id="calendarBtn" class="calendar-btn">Άνοιγμα Ημερολογίου</button>
 
-    <!-- Γραφήματα -->
-    <div class="chart-container">
-        <h3>Αέρας</h3>
-        <canvas id="airChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <h3>Θερμοκρασία</h3>
-        <canvas id="temperatureChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <h3>Υγρασία</h3>
-        <canvas id="humidityChart"></canvas>
-    </div>
-    <div class="chart-container">
-        <h3>Διοξείδιο στην Ατμόσφαιρα</h3>
-        <canvas id="co2Chart"></canvas>
+        <!-- Γραφήματα -->
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="airChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="humidityChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <canvas id="co2Chart"></canvas>
+        </div>
+
+        <!-- Ημερολόγιο -->
+        <div id="datepicker"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="/webapp/js/chart.js"></script>
 </body>
 </html>
-
-
-

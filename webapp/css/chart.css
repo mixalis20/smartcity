@@ -1,54 +1,86 @@
-/* Ρυθμίσεις για το body */
-/* Στυλ για την επικεφαλίδα */
-.page-title {
-    text-align: center;
-    font-size: 32px;
-    font-weight: bold;
-    color: #333;
-    margin-bottom: 40px;
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Στυλ για τα γραφήματα */
-.chart-container {
-    position: relative;
-    height: 400px;
-    width: 45%;
-    margin: 20px;
-    background-color: #f5f5f5; /* Γκρι φόντο για κάθε γράφημα */
-    border-radius: 8px; /* Στρογγυλεμένες γωνίες */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Σκιά γύρω από το γράφημα */
-    padding: 5px;
-    display: inline-block;
-}
-
-/* Στυλ για τα headers των γραφημάτων */
-.chart-container h3 {
-    text-align: center;
-    font-size: 24px;
-    color: #444;
-}
-
-/* Στυλ για το σώμα της σελίδας */
+/* Στυλ για το Dashboard */
 body {
-    background-color: #e5e5e5; /* Γενικό υπόβαθρο */
     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
 }
 
-/* Media Queries για κινητά και μικρές οθόνες */
-@media (max-width: 768px) {
-    .chart-container {
-        width: 90%; /* Κάνει τα γραφήματα μεγαλύτερα σε μικρές οθόνες */
-        margin: 10px auto;
-    }
-
-    .page-title {
-        font-size: 28px;
-    }
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+h1 {
+    text-align: center;
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
 
+.chart-container {
+    position: relative;
+    height: 300px; /* Μειώσαμε το ύψος των γραφημάτων */
+    margin-top: 20px;
+}
+
+.calendar-btn {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: block;
+    width: 200px;
+    margin: 0 auto; /* Κεντράρουμε το κουμπί */
+}
+
+.calendar-btn:hover {
+    background-color: #45a049;
+}
+
+/* Στυλ για το container */
+.container {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Στυλ για το ημερολόγιο (datepicker) */
+#datepicker {
+    display: none;   /* Κρύβουμε το ημερολόγιο αρχικά */
+    position: absolute;
+    top: 50px;       /* Απόσταση από την πάνω πλευρά */
+    right: 10px;     /* Απόσταση από τη δεξιά πλευρά */
+    z-index: 1000;   /* Διασφαλίζουμε ότι θα είναι πάνω από τα υπόλοιπα στοιχεία */
+    width: 250px;    /* Μικρό μέγεθος ημερολογίου */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Σκιά γύρω από το ημερολόγιο */
+    background-color: white;
+}
+
+/* Κουμπί ημερολογίου */
+.calendar-btn {
+    position: relative;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    display: inline-block;
+    margin-bottom: 20px;
+    z-index: 999;  /* Κάνει το κουμπί να είναι πάνω από τα υπόλοιπα στοιχεία */
+}
+
+/* Κάποιες τροποποιήσεις για τα γραφήματα */
+.chart-container {
+    margin-top: 20px;
+    position: relative;
+}
