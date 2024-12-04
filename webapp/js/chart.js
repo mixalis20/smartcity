@@ -105,29 +105,30 @@ const co2Chart = new Chart(document.getElementById('co2Chart'), {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Ενεργοποιούμε το ημερολόγιο με flatpickr
-    flatpickr("#datepicker", {
-        enableTime: false,  // Εάν δεν θέλουμε ώρα
-        dateFormat: "Y-m-d", // Μορφή ημερομηνίας
-        onChange: function(selectedDates, dateStr, instance) {
-            // Όταν επιλέγεται μια ημερομηνία, κάνουμε κάτι (π.χ. εμφανίζουμε την ημερομηνία)
-            alert("Επιλέξατε την ημερομηνία: " + dateStr);
-        }
-    });
+// Άνοιγμα / Κλείσιμο του ημερολογίου όταν πατηθεί το κουμπί
+const calendarBtn = document.getElementById('calendarBtn');
+const datepicker = document.getElementById('datepicker');
 
-    // Άνοιγμα / Κλείσιμο του ημερολογίου όταν πατηθεί το κουμπί
-    const calendarBtn = document.getElementById('calendarBtn');
-    const datepicker = document.getElementById('datepicker');
+// Ενεργοποιούμε το ημερολόγιο με flatpickr
+flatpickr("#datepicker", {
+    enableTime: false,  // Εάν δεν θέλουμε ώρα
+    dateFormat: "Y-m-d", // Μορφή ημερομηνίας
+    onChange: function(selectedDates, dateStr, instance) {
+        // Όταν επιλέγεται μια ημερομηνία, κάνουμε κάτι (π.χ. εμφανίζουμε την ημερομηνία)
+        alert("Επιλέξατε την ημερομηνία: " + dateStr);
+    }
+});
 
-    calendarBtn.addEventListener('click', function() {
-        // Εναλλαγή εμφάνισης του ημερολογίου
-        if (datepicker.style.display === 'none' || datepicker.style.display === '') {
-            datepicker.style.display = 'block';  // Εμφάνιση του ημερολογίου
-        } else {
-            datepicker.style.display = 'none';   // Απόκρυψη του ημερολογίου
-        }
-    });
+// Άνοιγμα / Κλείσιμο του ημερολογίου όταν πατηθεί το κουμπί
+calendarBtn.addEventListener('click', function() {
+    console.log("Το κουμπί πατήθηκε"); // Για να ελέγξουμε αν εκτελείται το event
+    if (datepicker.style.display === 'none' || datepicker.style.display === '') {
+        datepicker.style.display = 'block';  // Εμφάνιση του ημερολογίου
+        console.log("Το ημερολόγιο εμφανίστηκε");
+    } else {
+        datepicker.style.display = 'none';   // Απόκρυψη του ημερολογίου
+        console.log("Το ημερολόγιο κρύφτηκε");
+    }
 });
 
 

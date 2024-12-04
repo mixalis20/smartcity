@@ -7,11 +7,13 @@ body {
 }
 
 .container {
-    width: 80%;
-    margin: 20px auto;
-    background-color: #fff;
-    padding: 20px;
+    width: 900px;
+    height: 410px;
+    margin: 5px;
+    padding: 5px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;  
+    flex-wrap: wrap;
 }
 
 h1 {
@@ -21,29 +23,56 @@ h1 {
     margin-bottom: 20px;
 }
 
+
+
 .chart-container {
-    position: relative;
-    height: 300px; /* Μειώσαμε το ύψος των γραφημάτων */
-    margin-top: 20px;
+    width:350px;
+    height: 200px; /* Μειώσαμε το ύψος των γραφημάτων */
+    margin:10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    
+    
+    
+    
 }
 
 .calendar-btn {
-    margin-bottom: 20px;
-    padding: 10px;
+    padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
     font-size: 16px;
-    display: block;
-    width: 200px;
-    margin: 0 auto; /* Κεντράρουμε το κουμπί */
+    display: inline-block;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 999;
 }
 
 .calendar-btn:hover {
     background-color: #45a049;
 }
 
+/* Στυλ για το ημερολόγιο */
+#datepicker {
+    display: none;   /* Κρύβουμε το ημερολόγιο αρχικά */
+    position: absolute;
+    top: 50px;       /* Απόσταση από την πάνω πλευρά */
+    right: 10px;     /* Απόσταση από τη δεξιά πλευρά */
+    z-index: 1000;   /* Διασφαλίζουμε ότι θα είναι πάνω από τα υπόλοιπα στοιχεία */
+    width: 250px;    /* Μικρό μέγεθος ημερολογίου */
+    border-radius: 10px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2); /* Σκιά γύρω από το ημερολόγιο */
+    background-color: white;
+    padding: 10px; /* Προσθέτουμε λίγο padding για να είναι πιο ευδιάκριτο */
+}
+
+
+/* Στυλ για την εμφάνιση του ημερολογίου */
+.flatpickr-calendar {
+    z-index: 10000 !important; /* Αναγκάζουμε το ημερολόγιο να είναι πάνω από τα άλλα στοιχεία */
+}
 /* Στυλ για το container */
 .container {
     position: relative;
@@ -79,8 +108,3 @@ h1 {
     z-index: 999;  /* Κάνει το κουμπί να είναι πάνω από τα υπόλοιπα στοιχεία */
 }
 
-/* Κάποιες τροποποιήσεις για τα γραφήματα */
-.chart-container {
-    margin-top: 20px;
-    position: relative;
-}
