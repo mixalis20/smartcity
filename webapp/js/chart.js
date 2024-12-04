@@ -1,12 +1,30 @@
-// Συνάρτηση για την ανάγνωση του JSON και την δημιουργία των γραφημάτων
+
+function getRandomFromList(list) {
+    const randomIndex = Math.floor(Math.random() * list.length);
+    return list[randomIndex];
+}
+
+
 fetch('/webapp/json/chart.json')
     .then(response => response.json())
     .then(data => {
+        
+        const temperatureList = [-10, -5, 0, 5, 10, 15, 20, 25, 30, 35, 40, 45];  // Θερμοκρασίες σε °C
+        const humidityList = [0, 20, 40, 60, 80, 100];  // Υγρασία σε ποσοστά (%)
+        const co2List = [300, 400, 500, 600, 700, 800];  // CO2 σε ppm
+        const airList = [0, 50, 100, 150];  // Αέρας σε τυχαίες μονάδες
+
+        const temperatureRandomData = data.dates.map(() => getRandomFromList(temperatureList));
+        const humidityRandomData = data.dates.map(() => getRandomFromList(humidityList));
+        const co2RandomData = data.dates.map(() => getRandomFromList(co2List));
+        const airRandomData = data.dates.map(() => getRandomFromList(airList));
+
+        
         const airData = {
             labels: data.dates,
             datasets: [{
                 label: 'Αέρας',
-                data: data.air,
+                data: airRandomData,
                 borderColor: 'rgba(75, 192, 192, 1)',
                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
                 fill: true,
@@ -15,11 +33,12 @@ fetch('/webapp/json/chart.json')
             }]
         };
 
+        
         const temperatureData = {
             labels: data.dates,
             datasets: [{
                 label: 'Θερμοκρασία (°C)',
-                data: data.temperature,
+                data: temperatureRandomData,
                 borderColor: 'rgba(255, 99, 132, 1)',
                 backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 fill: true,
@@ -28,11 +47,12 @@ fetch('/webapp/json/chart.json')
             }]
         };
 
+        
         const humidityData = {
             labels: data.dates,
             datasets: [{
                 label: 'Υγρασία (%)',
-                data: data.humidity,
+                data: humidityRandomData,
                 borderColor: 'rgba(153, 102, 255, 1)',
                 backgroundColor: 'rgba(153, 102, 255, 0.2)',
                 fill: true,
@@ -41,11 +61,12 @@ fetch('/webapp/json/chart.json')
             }]
         };
 
+       
         const co2Data = {
             labels: data.dates,
             datasets: [{
                 label: 'Διοξείδιο του Άνθρακα (ppm)',
-                data: data.co2,
+                data: co2RandomData,
                 borderColor: 'rgba(255, 159, 64, 1)',
                 backgroundColor: 'rgba(255, 159, 64, 0.2)',
                 fill: true,
@@ -54,7 +75,7 @@ fetch('/webapp/json/chart.json')
             }]
         };
 
-        // Κοινές ρυθμίσεις για όλα τα γραφήματα
+        
         const commonOptions = {
             responsive: true,
             plugins: {
@@ -103,7 +124,7 @@ fetch('/webapp/json/chart.json')
             }
         };
 
-        // Δημιουργία των γραφημάτων με τα δεδομένα από το JSON
+        
         const airChart = new Chart(document.getElementById('airChart'), {
             type: 'line',
             data: airData,
