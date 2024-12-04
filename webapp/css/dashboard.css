@@ -1,37 +1,30 @@
-.dashboard{
-    color: white;
-    border-radius: 5px;
-    padding: 20px 70px 20px 20px;
-    background: blueviolet;
-}
+
 .container{
     display: flex;
-}
-.dashboardTop{
+    flex-wrap: wrap;
     color: white;
     border-radius: 5px;
     padding: 20px 70px 20px 20px;
-    background: blueviolet;
+    justify-content: space-evenly;
+    background-image: url(/webapp/images/cloud.webp);
 }
-.dashboardMiddle{
-    color: white;
-    border-radius: 5px;
-    padding: 40px 70px 40px 40px;
-    background: blueviolet;
-}
-.dashboardBottom{
+
+.titlee{
     color: white;
     border-radius: 5px;
     padding: 20px 70px 20px 20px;
-    background: blueviol
+    background: rgb(43, 110, 226);
+    justify-self: center;
+    width: 95%;
 }
-.h1{
-    background: #5372f0;
-    color: white;
-    padding: 18px 0;
-    text-align: center;
-    font-size: 1.75rem;
-}
-.body{
-    background: #E3F2FD;
+.dashboardItem{
+    background-color: rgb(59, 118, 186);
+    width: 20vw;
+    height: 15vw;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
 }
