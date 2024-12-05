@@ -37,11 +37,11 @@ const createIcon = (iconUrl) => L.icon({
 });
 
 const icons = {
-    wifi: createIcon('wifi-icon.webp'),
-    parking: createIcon('parking-icon.png'),
-    pharmacy: createIcon('pharmacy.png'),
-    atm: createIcon('atm.webp'),
-    landmark: createIcon('landmark.png')
+    wifi: createIcon('/webapp/images/wifi-icon.webp'),
+    parking: createIcon('/webapp/images/parking-icon.png'),
+    pharmacy: createIcon('/webapp/images/pharmacy.png'),
+    atm: createIcon('/webapp/images/atm.webp'),
+    landmark: createIcon('/webapp/images/landmark.png')
 };
 
 // Συνάρτηση για φόρτωση JSON δεδομένων και δημιουργία markers
@@ -64,10 +64,10 @@ async function loadMarkers(jsonFile, icon) {
 }
 
 // Φόρτωση δεδομένων από αρχεία JSON
-loadMarkers('data.json', icons.wifi);
-loadMarkers('data2.json', icons.pharmacy);
-loadMarkers('data3.json', icons.atm);
-loadMarkers('data4.json', icons.parking);
+loadMarkers('/webapp/json/data.json', icons.wifi);
+loadMarkers('/webapp/json/data2.json', icons.pharmacy);
+loadMarkers('/webapp/json/data3.json', icons.atm);
+loadMarkers('/webapp/json/data4.json', icons.parking);
 
 // Προσθήκη legend για τα εικονίδια
 const legend = L.control({ position: 'topright' });
@@ -75,10 +75,10 @@ legend.onAdd = () => {
     const div = L.DomUtil.create('div', 'leaflet-control-layers');
     div.innerHTML = `
         <strong>Σημεία Χάρτη:</strong><br>
-        <span><img src="atm.webp" alt="ATM" style="width: 20px; margin-right: 5px;"> ATM</span><br>
-        <span><img src="pharmacy.png" alt="Pharmacy" style="width: 20px; margin-right: 5px;"> Φαρμακεία</span><br>
-        <span><img src="wifi-icon.webp" alt="Wi-Fi" style="width: 20px; margin-right: 5px;"> Wi-Fi</span><br>
-        <span><img src="parking-icon.png" alt="Parking" style="width: 20px; margin-right: 5px;"> Πάρκινγκ</span><br>
+        <span><img src="/webapp/images/atm.webp" alt="ATM" style="width: 20px; margin-right: 5px;"> ATM</span><br>
+        <span><img src="/webapp/images/pharmacy.png" alt="Pharmacy" style="width: 20px; margin-right: 5px;"> Φαρμακεία</span><br>
+        <span><img src="/webapp/images/wifi-icon.webp" alt="Wi-Fi" style="width: 20px; margin-right: 5px;"> Wi-Fi</span><br>
+        <span><img src="/webapp/images/parking-icon.png" alt="Parking" style="width: 20px; margin-right: 5px;"> Πάρκινγκ</span><br>
     `;
     return div;
 };
@@ -183,7 +183,7 @@ darkThemeCheckbox.addEventListener('change', () => {
 // Συνάρτηση για φόρτωση δεδομένων από το JSON αρχείο και προσθήκη markers
 async function loadPointsOfInterest() {
     try {
-        const response = await fetch('md.json');  // Φόρτωση του JSON αρχείου
+        const response = await fetch('/webapp/json/md.json');  // Φόρτωση του JSON αρχείου
         if (!response.ok) throw new Error('Σφάλμα φόρτωσης σημείων ενδιαφέροντος');
 
         const points = await response.json();  // Μετατροπή του JSON σε αντικείμενα

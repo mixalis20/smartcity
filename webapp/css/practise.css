@@ -16,6 +16,7 @@ body{
     border-radius: 20px;
     padding: 40px 35px;
     text-align: center;
+    height: 100vh;
 }
 .search{
     width: 100%;
