@@ -3,7 +3,7 @@
 const container = document.getElementById("sights");
 
 async function generateList() {
-  const data = await fetch("./md.json").then((response) => response.json());
+  const data = await fetch("/webapp/json/md.json").then((response) => response.json());
   container.innerHTML = "";  // Καθαρίζουμε το container πριν προσθέσουμε τα νέα στοιχεία
   
   const length = data.length;

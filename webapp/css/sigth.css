@@ -1,5 +1,5 @@
 body {
-    background-image: url(background.jpg);
+    background-image: url(/webapp/images/background.jpg);
     background-repeat: no-repeat;
     width: 100%;
     background-attachment: fixed;
@@ -42,4 +42,6 @@ p {
     font-family: 'Roboto', sans-serif; /* Μια καθαρή και μοντέρνα γραμματοσειρά */
     max-width: 800px; /* Περιορισμός πλάτους για καλύτερη εμφάνιση */
 }
-
+.img-sights img{
+    height: 100vh;
+}
