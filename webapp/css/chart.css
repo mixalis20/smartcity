@@ -1,20 +1,12 @@
 /* Στυλ για το Dashboard */
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: whitesmoke;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    width: 1000px;
-    height: 410px;
-    margin: 5px;
-    padding: 5px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: flex;  
-    flex-wrap: wrap;
-}
+
 
 h1 {
     text-align: center;
@@ -26,12 +18,19 @@ h1 {
 
 
 .chart-container {
-    width:350px;
-    height: 200px; /* Μειώσαμε το ύψος των γραφημάτων */
-    margin:10px;
+    width: 48%; /* Κάνει τα αντικείμενα να καταλαμβάνουν περίπου το 50% του πλάτους του container */
+    margin: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    justify-content: center;
+    height: 300px; /* Προσδιόρισε το ύψος του κάθε γραφήματος */
 }
+
+.chart-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px; /* Κενό ανάμεσα στα αντικείμενα */
+}
+
 
 .calendar-btn {
     padding: 10px 20px;

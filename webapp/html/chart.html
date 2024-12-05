@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Καιρού</title>
+    <title>Charts Καιρου</title>
     <link rel="stylesheet" href="/webapp/css/chart.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
@@ -11,31 +11,28 @@
 </head>
 <body>
     <button id="calendarBtn" class="calendar-btn">Άνοιγμα Ημερολογίου</button>
-    <h1>Dashboard Καιρού</h1>
-    <div class="container">
-       
-
-        <!-- Κουμπί για άνοιγμα ημερολογίου -->
+    <h1>charts</h1>
       
 
-        <!-- Σειρά με τα γραφήματα το ένα δίπλα στο άλλο -->
-        
-            <div class="chart-container">
-                <canvas id="temperatureChart"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="airChart"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="humidityChart"></canvas>
-            </div>
-
-            <div class="chart-container">
-                <canvas id="co2Chart"></canvas>
-            </div>
+    <div class="chart-wrapper">
+        <div class="chart-container">
+            <canvas id="temperatureChart"></canvas>
+        </div>
+    
+        <div class="chart-container">
+            <canvas id="airChart"></canvas>
+        </div>
+    
+        <div class="chart-container">
+            <canvas id="humidityChart"></canvas>
+        </div>
+    
+        <div class="chart-container">
+            <canvas id="co2Chart"></canvas>
+        </div>
     </div>
+    
+    
 
         <!-- Ημερολόγιο -->
         <div id="datepicker"></div>
