@@ -1,51 +1,87 @@
+/* Γενικά στυλ για το σώμα της σελίδας */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
 }
 
-body {
-    font-family: Arial, sans-serif;
+/* Στυλ για το container του stopwatch */
+.container {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-}
-
-.stopwatch-container {
-    text-align: center;
-    background-color: #fff;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.time {
-    font-size: 3em;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-
-.controls {
-    display: flex;
     justify-content: center;
-    gap: 20px;
+    height: 100vh;
+    background: linear-gradient(135deg, #3a7bd5, #00d2ff); /* Γαλάζιο γραδικό φόντο */
 }
 
-button {
-    padding: 10px 20px;
-    font-size: 1.2em;
+/* Στυλ για την οθόνη του χρόνου */
+#time {
+    font-size: 4rem;
+    color: white;
+    font-weight: bold;
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Στυλ για το κουμπί Start/Stop */
+#startStopBtn {
+    background-color: #00d2ff;
+    color: white;
+    font-size: 1.5rem;
+    padding: 15px 30px;
     border: none;
-    border-radius: 5px;
+    border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
-    background-color: #ddd;
+/* Αλλαγή χρώματος όταν το κουμπί είναι hover */
+#startStopBtn:hover {
+    background-color: #007c9f;
+}
+
+/* Στυλ για το κουμπί Reset */
+#resetBtn {
+    background-color: #ff4d4d;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Αλλαγή χρώματος όταν το κουμπί είναι hover */
+#resetBtn:hover {
+    background-color: #e60000;
+}
+
+/* Στυλ για το κουμπί Reset όταν το χρονοδιάγραμμα είναι σταματημένο */
+#resetBtn:disabled {
+    background-color: #d3d3d3;
+    cursor: not-allowed;
+}
+
+/* Προσθήκη ελαφριάς σκιάς και animation στα κουμπιά */
+button {
+    outline: none;
+    transition: transform 0.1s ease-in-out;
 }
 
 button:active {
-    background-color: #bbb;
+    transform: scale(0.95);
+}
+
+/* Στυλ για το wrapper των κουμπιών */
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }

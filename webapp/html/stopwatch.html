@@ -3,17 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stopwatch</title>
     <link rel="stylesheet" href="/webapp/css/stopwatch.css">
+    <title>Stopwatch</title>
 </head>
 <body>
-    <div class="stopwatch-container">
-        <div class="time" id="time">00:00:00</div>
-        <div class="controls">
+    <div class="container">
+        <div id="time">00:00:00</div>
+        <div class="buttons">
             <button id="startStopBtn">Start</button>
-            <button id="resetBtn">Reset</button>
+            <button id="resetBtn" disabled>Reset</button>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <script src="/webapp/js/stopwatch.js"></script>
 </body>
 </html>
