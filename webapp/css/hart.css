@@ -1,0 +1,98 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --main-color: #dc143c;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: rgb(7, 7, 20);
+}
+
+/* grey-hart */
+.grey-hart {
+    background: #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    position: relative;
+    top: 0;
+    transform: rotate(-45deg);
+}
+
+.grey-hart::before,
+.grey-hart::after {
+    content: "";
+    background: #ccc;
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    position: absolute;
+}
+
+.grey-hart::before {
+    top: -50px;
+    left: 0;
+}
+
+.grey-hart::after {
+    left: 50px;
+    top: 0;
+}
+
+/* red-hart */
+.red-hart {
+    background: var(--main-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    width: 100px;
+    transform: rotate(-45deg);
+    position: absolute;
+    opacity: 0; /* Ξεκινά αόρατο */
+}
+
+.red-hart::before,
+.red-hart::after {
+    content: "";
+    background: var(--main-color);
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    position: absolute;
+}
+
+.red-hart::before {
+    top: -50px;
+    left: 0;
+}
+
+.red-hart::after {
+    left: 50px;
+    top: 0;
+}
+
+.red-hart.animation {
+    animation: pop 0.9s ease-out forwards;
+}
+
+@keyframes pop {
+    0% {
+        transform: scale(1) rotate(-45deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.7) rotate(-45deg);
+        opacity: 0;
+    }
+}
