@@ -5,7 +5,83 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Widget on Map</title>
     <!-- Εισαγωγή του Leaflet CSS -->
-    <link rel="stylesheet" href="/webapp/css/weather-data.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <style>
+        /* Ρυθμίσεις για τον χάρτη */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+
+        /* Στυλ για το widget του καιρού πάνω από τον χάρτη */
+        .weather-widget {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            font-family: 'Arial', sans-serif;
+            z-index: 1000;
+            width: 250px;
+            display: none; /* Αρχικά κρυφό */
+            transition: background-color 0.5s ease; /* Ομαλή μετάβαση στο χρώμα */
+            opacity: 0.95; /* Λιγότερη διαφάνεια για να μην είναι τόσο διάφανο */
+        }
+
+        .weather-widget h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .weather-widget p {
+            font-size: 14px;
+            margin: 5px 0;
+            color: #666;
+        }
+
+        .weather-widget .temperature {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ff7f50;
+        }
+
+        .weather-widget .weather-description {
+            font-size: 16px;
+            color: #0088cc;
+        }
+
+        .weather-widget .weather-icon {
+            width: 40px;
+            height: 40px;
+            vertical-align: middle;
+        }
+
+        /* Στυλ για τα εικονίδια καιρού */
+        .weather-widget .weather-info {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        .weather-widget .weather-info img {
+            margin-right: 10px;
+        }
+
+        .weather-widget .weather-info span {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* Στυλ για τα σύμβολα του καιρού */
+        .weather-icon-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
 
@@ -19,7 +95,7 @@
         <p class="weather-description" id="weather-description">Weather: -</p>
         
         <div class="weather-info">
-            <img id="weather-icon" class="weather-icon" src="/webapp/images/sun.png" alt="Weather Icon" />
+            <img id="weather-icon" class="weather-icon" src="" alt="Weather Icon" />
             <span id="weather-humidity">Humidity: -</span>
         </div>
 
@@ -30,6 +106,93 @@
 
     <!-- Εισαγωγή των απαραίτητων βιβλιοθηκών JavaScript -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <script  src="/webapp/js/weather-data.js"></script>
+    <script>
+        // Το API key σου από το OpenWeatherMap
+        const apiKey = 'ab1bb8942c19a355d0744cbc078f6648'; // Αντικατέστησε με το δικό σου API key
+
+        // Δημιουργία του χάρτη
+        const map = L.map('map').setView([37.9838, 23.7275], 5); // Κέντρο στον χάρτη της Ευρώπης (μπορείς να αλλάξεις)
+
+        // Προσθήκη χάρτη μέσω tile layer (OpenStreetMap)
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Σημεία (Cities) για markers στον χάρτη
+        const cities = [
+            { name: "Athens", lat: 37.9838, lon: 23.7275 },
+            { name: "London", lat: 51.5074, lon: -0.1278 },
+            { name: "Paris", lat: 48.8566, lon: 2.3522 },
+            { name: "Alexandroupoli", lat: 40.8503, lon:25.8830 },
+            { name: "Italy", lat: 41.8719, lon:12.5674 },
+            { name: "Germany", lat: 51.1657, lon:10.4515 },
+            { name: "Spain", lat: 40.4637, lon:-3.7492 },
+            { name: "Poland", lat: 51.9194, lon:19.1451 },
+            { name: "Russia", lat: 55.7558, lon:37.6173 },
+            { name: "Romania", lat: 45.9432, lon:24.9668 },
+           
+        ];
+
+        // Προσθήκη markers για κάθε πόλη
+        cities.forEach(city => {
+            const marker = L.marker([city.lat, city.lon]).addTo(map);
+            marker.bindPopup(`<b>${city.name}</b>`);
+
+            // Όταν ο χρήστης κάνει κλικ σε έναν marker, εμφανίζεται το widget με τον καιρό
+            marker.on('click', function() {
+                displayWeather(city.lat, city.lon, city.name);
+            });
+        });
+
+        // Συνάρτηση για την εμφάνιση του widget με τα δεδομένα καιρού
+        function displayWeather(lat, lon, cityName) {
+            const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+            // Αίτηση στο OpenWeatherMap API
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    // Ενημέρωση του widget με τα δεδομένα καιρού
+                    document.getElementById('weather-city').textContent = cityName;
+                    const temperature = data.main.temp;
+                    document.getElementById('weather-temp').textContent = `Temperature: ${temperature}°C`;
+                    document.getElementById('weather-description').textContent = `Weather: ${data.weather[0].description}`;
+                    document.getElementById('weather-humidity').textContent = `Humidity: ${data.main.humidity}%`;
+                    document.getElementById('weather-wind').textContent = `Wind Speed: ${data.wind.speed} m/s`;
+
+                    // Προσθήκη εικόνας καιρού
+                    const weatherIconUrl = `http://openweathermap.org/img/wn/${data.weather[0].icon}.png`;
+                    document.getElementById('weather-icon').src = weatherIconUrl;
+
+                    // Ενημέρωση του χρώματος του widget ανάλογα με τη θερμοκρασία
+                    updateWidgetColor(temperature);
+
+                    // Εμφάνιση του widget με τα δεδομένα
+                    document.getElementById('weather-widget').style.display = 'block';
+                })
+                .catch(error => {
+                    console.error('Error fetching weather data:', error);
+                });
+        }
+
+        // Συνάρτηση για την αλλαγή του χρώματος του widget
+        function updateWidgetColor(temperature) {
+            const widget = document.getElementById('weather-widget');
+            
+            if (temperature < 5) {
+                // Μπλε-μοβ χρώματα για θερμοκρασία κάτω από 5°C
+                widget.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';  // Μπλε
+                widget.style.borderColor = 'rgba(128, 0, 128, 0.5)'; // Μωβ
+            } else if (temperature > 10) {
+                // Κίτρινο-κόκκινο χρώματα για θερμοκρασία πάνω από 10°C
+                widget.style.backgroundColor = 'rgba(255, 223, 0, 0.3)'; // Κίτρινο
+                widget.style.borderColor = 'rgba(255, 0, 0, 0.5)'; // Κόκκινο
+            } else {
+                // Σαφή εμφάνιση για ενδιάμεσες θερμοκρασίες
+                widget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)'; // Λευκό
+                widget.style.borderColor = 'rgba(0, 0, 0, 0.2)'; // Μαύρο
+            }
+        }
+    </script>
 </body>
 </html>
