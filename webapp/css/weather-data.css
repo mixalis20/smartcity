@@ -1,0 +1,74 @@
+/* Ρυθμίσεις για τον χάρτη */
+#map {
+    height: 500px;
+    width: 100%;
+}
+
+/* Στυλ για το widget του καιρού πάνω από τον χάρτη */
+.weather-widget {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    font-family: 'Arial', sans-serif;
+    z-index: 1000;
+    width: 250px;
+    display: none; /* Αρχικά κρυφό */
+    transition: background-color 0.5s ease; /* Ομαλή μετάβαση στο χρώμα */
+    opacity: 0.95; /* Λιγότερη διαφάνεια για να μην είναι τόσο διάφανο */
+}
+
+.weather-widget h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.weather-widget p {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #666;
+}
+
+.weather-widget .temperature {
+    font-size: 20px;
+    font-weight: bold;
+    color: #ff7f50;
+}
+
+.weather-widget .weather-description {
+    font-size: 16px;
+    color: #0088cc;
+}
+
+.weather-widget .weather-icon {
+    width: 40px;
+    height: 40px;
+    vertical-align: middle;
+}
+
+/* Στυλ για τα εικονίδια καιρού */
+.weather-widget .weather-info {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.weather-widget .weather-info img {
+    margin-right: 10px;
+}
+
+.weather-widget .weather-info span {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Στυλ για τα σύμβολα του καιρού */
+.weather-icon-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
