@@ -133,7 +133,7 @@ app.delete("/api/sights/:id", (req, res, next) => {
                 return;
             }
             res.json({ "message": "Sight deleted", changes: this.changes })
-        });
+        }); 
 })
 
 
