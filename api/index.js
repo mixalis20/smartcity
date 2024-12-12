@@ -107,15 +107,15 @@ app.put("/api/sights/:id", (req, res) => {
     const {id} = req.params;
     const {title, image} = req.body;
     if (!title || !image) {
-        res.status(406).send("Title and image are required");
+        res.status(406).json("Title and image are required");
     } else {
         const sqlite = "UPDATE sights SET title = ?, image = ? WHERE id = ?";
         db.run(sqlite, [title, image, id], function(err) {
             if (err) {
                 console.error(err.message)
-                res.status(500).send("Internal Server error");
+                res.status(500).json("Internal Server error");
             } else if (this.changes === 0) {
-                res.status(404).send("Sight not found");
+                res.status(404).json("Sight not found");
             } else {
                 res.status(200).send({id, title, image});
             }
@@ -131,6 +131,8 @@ app.delete("/api/sights/:id", (req, res, next) => {
             if (err) {
                 res.status(400).json({ "error": res.message })
                 return;
+            } else if (this.changes == 0) {
+                res.status(404).json("Sight not found");
             }
             res.json({ "message": "Sight deleted", changes: this.changes })
         }); 
