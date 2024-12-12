@@ -170,11 +170,12 @@ darkThemeCheckbox.addEventListener('change', () => {
 // Συνάρτηση για φόρτωση δεδομένων από το JSON αρχείο και προσθήκη markers
 async function loadPointsOfInterest() {
     try {
-        const response = await fetch('/webapp/json/md.json');  // Φόρτωση του JSON αρχείου
+        const response = await fetch('http://localhost:8000/api/sights');  // Φόρτωση του JSON αρχείου
+        console.log(response)
         if (!response.ok) throw new Error('Σφάλμα φόρτωσης σημείων ενδιαφέροντος');
 
         const points = await response.json();  // Μετατροπή του JSON σε αντικείμενα
-
+        console.log(points)
         points.forEach(point => {
             const marker = L.marker([point.lat, point.lon]).addTo(map);
             marker.bindPopup(`
