@@ -136,18 +136,6 @@ app.delete("/api/sights/:id", (req, res, next) => {
         });
 })
 
-//push
-key_val_sights = [
-    {id: 1, title: "Λευκός Πύργος",description: "Ο Λευκός Πύργος της Θεσσαλονίκης, είναι οχυρωματικό έργο οθωμανικής κατασκευής του 15ου αιώνα.", image: "/webapp/images/img1.jpg", lat: 40.626365, lon: 22.948752, type: "landmark"  },
-    {id: 2, title: "ΚΗΠΟΙ ΤΟΥ ΠΑΣΑ",description: "Στην παραλία της Θεσσαλονίκης, δίπλα στον Λευκό Πύργο βρίσκεται το άγαλμα του Μεγάλου Αλεξάνδρου, Βασιλέα των Μακεδόνων.",  image: "/webapp/images/img2.jpg", lat: 40.638229, lon: 22.959481, type: "landmark" },
-    {id: 3, title: "ΑΓΑΛΜΑ ΜΕΓΑΛΟΥ ΑΛΕΞΑΝΔΡΟΥ",description: "Μια άποψη που υπάρχει αναφέρει ότι οι κήποι ονομάστηκαν έτσι καθώς υπήρξαν το ησυχαστήριο του Οθωμανού μεράρχου Σεϊφουλάχ Πασά.", image: "/webapp/images/img3.jpg", lat: 40.638229, lon: 22.959481, type: "landmark" },
-    {id: 4, title: "ΑΨΙΔΑ ΤΟΥ ΓΑΛΕΡΙΟΥ",description: "Χτίστηκε ως συγκρότημα ανακτόρων του Ρωμαίου αυτοκράτορα Γαλέριου κατά την περίοδο της Ρωμαϊκής «Τετραρχίας»", image: "/webapp/images/img4.jpg", lat: 40.632139, lon: 22.951866, type: "landmark" },
-    {id: 5, title: "Ροτόντα",description: "Η αρχική χρήση της δεν είναι γνωστή, αλλά διατυπώθηκαν ως τώρα διάφορες υποθέσεις: ότι υπήρξε ναός του Δία ή των Καβείρων.", image: "/webapp/images/img5.jpg", lat: 40.633203, lon: 22.953148, type: "landmark" }
-];
-  
-key_val_sights.push({id: 6, title: "Φάρος της Αλεξανδρούπολης",description: "Η αρχική χρήση της δεν είναι γνωστή, αλλά διατυπώθηκαν ως τώρα διάφορες υποθέσεις: ότι υπήρξε ναός του Δία ή των Καβείρων.", image: "/webapp/images/img5.jpg", lat: 40.633203, lon: 22.953148, type: "landmark" });
-  
-console.log(key_val_sights);
 
 // Default response for any other request
 app.use(function (req, res) {
