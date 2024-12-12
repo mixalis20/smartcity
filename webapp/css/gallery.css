@@ -77,6 +77,10 @@ body {
   transform: scale(1.1);
 }
 
+.img{
+  height: 50px;
+  width : 100px;
+}
 /* Στυλ για το container των εικόνων */
 /* .container {
   margin: 0 auto;

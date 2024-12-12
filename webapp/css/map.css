@@ -22,6 +22,7 @@ body.dark-theme {
     width: 100%;  /* Πλάτος 100% του γονικού container */
 }
 
+
 /* Στυλ για το container των κουμπιών */
 #button-container {
     position: absolute;
@@ -111,5 +112,6 @@ body.dark-theme .leaflet-control-layers {
 .leaflet-popup {
     max-width: 300px; /* Μπορείς να το μικρύνεις ή να το αυξήσεις ανάλογα με τις ανάγκες σου */
 }
+
 
 

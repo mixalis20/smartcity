@@ -41,6 +41,14 @@ p {
     max-width: 800px; 
 }
 .img-sights img{
-    height: 50vh;
-    width: 100vh;
+    height: 5px;
+    width: 100px;
 }
+
+
+.sights img{
+    height: 500px;
+    width : 100%;
+}
+
+

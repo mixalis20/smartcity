@@ -44,7 +44,7 @@ async function generateList() {
     // Προσθήκη listener για το κλικ
     el.addEventListener("click", function() {
       // Ανακατεύθυνση στη σελίδα με βάση το id της τοποθεσίας (π.χ., sights1.html, sights2.html)
-      window.location.href = `sight${data[i].id}.html`;
+      window.location.href = `sight.html?sightId=${data[i].id}`;
     });
   }
 }
