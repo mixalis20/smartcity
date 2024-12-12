@@ -1,0 +1,20 @@
+app.get("/api/users", (req, res, next) => {
+    var sql = "select * from user"
+    var params = []
+    db.all(sql, params, (err, rows) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message":"success",
+            "data":rows
+        })
+      });
+});
+
+
+For each endpoint, Express.js will pass a req object (request) and a res object (response) to handle your response. The request object contains headers, parameters and body. The response object allows to send content, and extra headers.
+db.all(sql, params, callback) is a SQLite command to retrieve all rows from a SQL query. The callback function will receive an err (error) object and the rows retrieved from the database.
+If there is a problem with the SQL query (err not null), the callback will return a HTTP 400 (Bad request), and a JSON error message.
+If everything is ok, it will return a JSON response with a message and the data (array of rows) using res.json(obj)

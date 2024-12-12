@@ -1,0 +1,17 @@
+app.delete("/api/user/:id", (req, res, next) => {
+    db.run(
+        'DELETE FROM user WHERE id = ?',
+        req.params.id,
+        function (err, result) {
+            if (err){
+                res.status(400).json({"error": res.message})
+                return;
+            }
+            res.json({"message":"deleted", changes: this.changes})
+    });
+})
+
+
+In this case, we use app.delete() and a variable expression (:id)  to map the user id of the request.
+Then, we run a DELETE command filtered by the user id (req.params.id)
+If everything is ok, we return a JSON response, including the number of rows affected (changes). If the user was already deleted, or the id was not found, the value will be 0.

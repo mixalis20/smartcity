@@ -1,0 +1,19 @@
+app.get("/api/user/:id", (req, res, next) => {
+    var sql = "select * from user where id = ?"
+    var params = [req.params.id]
+    db.get(sql, params, (err, row) => {
+        if (err) {
+          res.status(400).json({"error":err.message});
+          return;
+        }
+        res.json({
+            "message":"success",
+            "data":row
+        })
+      });
+});
+
+
+For this case, we use a special Express.js endpoint with a variable expression (:id), mapped to a variable in req.params (req.params.id). For example, a request using /api/user/1 will filter the query using id = 1.
+Also, we use SQL parameter binding to fill the original query (this is mandatory to prevent SQL injection). Each '?'symbol in the sql query is mapped to an item in the params array, in the same order.
+As we use the db.get(sql, params, callback) function, we only get a single rowof data, rather than a list when you use db.all()
