@@ -13,20 +13,7 @@ const darkLayer = L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x
 // Προσθήκη του Light Layer αρχικά
 lightLayer.addTo(map);
 
-// Κουμπί για αλλαγή θέματος (Light/Dark)
-const themeToggleBtn = document.getElementById('theme-toggle');
-let isLightTheme = true;
 
-themeToggleBtn?.addEventListener('click', () => {
-    if (isLightTheme) {
-        map.removeLayer(lightLayer);
-        darkLayer.addTo(map);
-    } else {
-        map.removeLayer(darkLayer);
-        lightLayer.addTo(map);
-    }
-    isLightTheme = !isLightTheme;
-});
 
 // Δημιουργία προσαρμοσμένων εικονιδίων
 const createIcon = (iconUrl) => L.icon({

@@ -9,24 +9,32 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Σημεία (Cities) για markers στον χάρτη
-const cities = [
-    { name: "Athens", lat: 37.9838, lon: 23.7275 },
-    { name: "London", lat: 51.5074, lon: -0.1278 },
-    { name: "Paris", lat: 48.8566, lon: 2.3522 },
-    // Προσθέστε άλλες πόλεις εδώ
-];
+// Φόρτωση των σημείων από το JSON αρχείο
+fetch('../json/weather-data.json')  // Αιτούμενο αρχείο JSON
+  .then(response => response.json())
+  .then(cities => {
+    // Προσθήκη markers για κάθε πόλη από το JSON
+    cities.forEach(city => {
+       const customIcon = L.icon({
+            iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/4/4c/Green_circle.svg',  // Εδώ βάζεις τη δική σου εικόνα
+            iconSize: [32, 32],  // Μέγεθος της εικόνας
+            iconAnchor: [16, 32],  // Κέντρο της εικόνας
+            popupAnchor: [0, -32]  // Το σημείο του popup πάνω από τον marker
+        });
+        
+  
+        const marker = L.marker([city.lat, city.lon]).addTo(map);
+        marker.bindPopup(`<b>${city.name}</b>`);
 
-// Προσθήκη markers για κάθε πόλη
-cities.forEach(city => {
-    const marker = L.marker([city.lat, city.lon]).addTo(map);
-    marker.bindPopup(`<b>${city.name}</b>`);
-
-    // Όταν ο χρήστης κάνει κλικ σε έναν marker, εμφανίζεται το widget με τον καιρό
-    marker.on('click', function() {
-        displayWeather(city.lat, city.lon, city.name);
+        // Όταν ο χρήστης κάνει κλικ σε έναν marker, εμφανίζεται το widget με τον καιρό
+        marker.on('click', function() {
+            displayWeather(city.lat, city.lon, city.name);
+        });
     });
-});
+  })
+  .catch(error => {
+    console.error('Δεν ήταν δυνατή η φόρτωση του αρχείου JSON:', error);
+  });
 
 // Συνάρτηση για την εμφάνιση του widget με τα δεδομένα καιρού
 function displayWeather(lat, lon, cityName) {
@@ -63,17 +71,18 @@ function displayWeather(lat, lon, cityName) {
 function updateWidgetColor(temperature) {
     const widget = document.getElementById('weather-widget');
     
-    if (temperature < 5) {
+    if (temperature > 15) {
+        // Κόκκινο χρώμα για θερμοκρασία πάνω από 15°C
+        widget.style.backgroundColor = 'rgba(255, 0, 0, 0.5)'
+        widget.style.borderColor = 'rgba(255, 0, 0, 0.5)'  // Κόκκινο
+    } else if (temperature < 5) {
         // Μπλε-μοβ χρώματα για θερμοκρασία κάτω από 5°C
         widget.style.backgroundColor = 'rgba(0, 0, 255, 0.2)';  // Μπλε
         widget.style.borderColor = 'rgba(128, 0, 128, 0.5)'; // Μωβ
-    } else if (temperature > 10) {
-        // Κίτρινο-κόκκινο χρώματα για θερμοκρασία πάνω από 10°C
-        widget.style.backgroundColor = 'rgba(255, 223, 0, 0.3)'; // Κίτρινο
-        widget.style.borderColor = 'rgba(255, 0, 0, 0.5)'; // Κόκκινο
     } else {
         // Σαφή εμφάνιση για ενδιάμεσες θερμοκρασίες
         widget.style.backgroundColor = 'rgba(255, 255, 255, 0.9)'; // Λευκό
         widget.style.borderColor = 'rgba(0, 0, 0, 0.2)'; // Μαύρο
     }
 }
+
